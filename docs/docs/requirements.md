@@ -11,8 +11,8 @@
 - **Podman or Docker** – see [Podman installation](https://podman.io/getting-started/installation){target="_blank"} or [Docker installation](https://docs.docker.com/get-docker/){target="_blank"}
     - If you use Podman, we recommend [Podman Desktop](https://podman-desktop.io/docs/installation){target="_blank"} for easier container management.
     - Warm up container images:
-      - Podman: ```podman pull pgvector/pgvector:pg17```
-      - Docker: ```docker pull pgvector/pgvector:pg17```
+        - Podman: ```podman pull pgvector/pgvector:pg17```
+        - Docker: ```docker pull pgvector/pgvector:pg17```
 - **OpenShift Developer Sandbox** – [provision your instance](https://developers.redhat.com/developer-sandbox){target="_blank"}
     - Click “Start your sandbox for free” and follow the instructions
     - When you see a list of Red Hat products to try on Sandbox, choose “OpenShift”
