@@ -3,12 +3,25 @@
 ## Software Requirements
 
 - **JDK 21.0 or later** – [Download from Adoptium](https://adoptium.net/){target="_blank"}
+- **Maven** – [Download and install](https://maven.apache.org/install.html){target="_blank"}
+- **Git** – [Installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git){target="_blank"}
+- **IDE with Java support** – IntelliJ, Eclipse, VSCode (with Java extension), etc.
+- **Terminal** – to run commands
 - **OpenAI API key** – provided by the workshop organizer
 - **Podman or Docker** – see [Podman installation](https://podman.io/getting-started/installation){target="_blank"} or [Docker installation](https://docs.docker.com/get-docker/){target="_blank"}
     - If you use Podman, we recommend [Podman Desktop](https://podman-desktop.io/docs/installation){target="_blank"} for easier container management.
-- **IDE with Java support** – IntelliJ, Eclipse, VSCode (with Java extension), etc.
-- **Terminal** – to run commands
-- _(Optional)_ **Git** – [Installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git){target="_blank"}
+    - Warm up container images:
+      - Podman: ```podman pull pgvector/pgvector:pg17```
+      - Docker: ```docker pull pgvector/pgvector:pg17```
+- **OpenShift Developer Sandbox** – [provision your instance](https://developers.redhat.com/developer-sandbox){target="_blank"}
+    - Click “Start your sandbox for free” and follow the instructions
+    - When you see a list of Red Hat products to try on Sandbox, choose “OpenShift”
+- **OpenShift Command Line Interface (CLI)** – [follow the instructions](https://developers.redhat.com/learn/openshift/download-and-install-red-hat-openshift-cli){target="_blank"} after provisioning your Sandbox account
+- **kubectl** – [Download and install](https://kubernetes.io/docs/tasks/tools/#kubectl){target="_blank"}
+- **Ollama** – [Download and install](https://ollama.com/download){target="_blank"}
+- **Quarkus CLI** - [Installation guide](https://quarkus.io/guides/cli-tooling){target="_blank"}
+
+
 
 [//]: # (???+ note "Want to use our environment rather than yours?")
 
@@ -19,7 +32,12 @@
 
 ## AI Model Requirements
 
-You will need an OpenAI API key to complete this workshop.  
+- **llama3.2:3b** - Run this command after installing Ollama:
+    - ```ollama pull llama3.2:3b```
+- If your laptop has more than 16GB available, you'll have better results with gpt-oss model:
+    - ```ollama pull gpt-oss:20b```
+
+If you prefer, you can use an OpenAI API key to complete this workshop.  
 If your instructor provided a key, use that one. Otherwise, [create an API key](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key){target="_blank"}.
 
 ??? info "No instructor-provided key?"
@@ -80,14 +98,14 @@ Either clone the repository with Git or download a ZIP archive.
 ### With Git
 
 ```shell
-git clone https://github.com/quarkusio/quarkus-langchain4j-workshop.git
+git clone https://github.com/eldermoraes/quarkus-langchain4j-workshop.git
 cd quarkus-langchain4j-workshop
 ```
 
 ### Direct Download
 
 ```shell
-curl -L -o workshop.zip https://github.com/quarkusio/quarkus-langchain4j-workshop/archive/refs/heads/main.zip
+curl -L -o workshop.zip https://github.com/eldermoraes/quarkus-langchain4j-workshop/archive/refs/heads/main.zip
 unzip workshop.zip
 cd quarkus-langchain4j-workshop-main
 ```
@@ -107,13 +125,6 @@ To avoid bandwidth issues during the session, we recommend pre-downloading them.
 
 !!! tip 
     This command not only downloads dependencies but also verifies your setup before the workshop.
-
-### Warm up Docker Images
-
-* Podman: `podman pull pgvector/pgvector:pg17`
-* Docker: `docker pull pgvector/pgvector:pg17`
-
----
 
 ## Importing the Project in Your IDE
 
