@@ -1,10 +1,19 @@
 # Step 01 - Introduction to Quarkus LangChain4j
 
-To get started, make sure you use the `step-01` directory.
+To get started, make sure you use the `quarkus-workshop-langchain4j/section-1/step-01` directory.
 
-This step is the starting point for the workshop.
-It's a simple Quarkus application that uses the [Quarkus LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html){target="_blank"} extension to interact with OpenAI's gpt-4o model.
+This step is the starting point for the workshop. 
+
+We are assuming that you are using local gpt-oss:20b model with Ollama. If you are using other model or OpenAI API key, adjust the `application.properties` file accordingly (more details about it in the next step).
+
+It's a simple Quarkus application that uses the [Quarkus LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html){target="_blank"} extension to interact with the LLM.
 It's a simple chatbot that we will extend in the subsequent steps.
+
+Before proceed, make sure your local Ollama is up and running:
+
+```shell
+ollama serve
+```
 
 ## Running the application
 
