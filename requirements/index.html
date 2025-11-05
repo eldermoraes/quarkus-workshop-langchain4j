@@ -1152,23 +1152,16 @@ You are not viewing the latest version.
 <h2 id="ai-model-requirements">AI Model Requirements<a class="headerlink" href="#ai-model-requirements" title="Permanent link"></a></h2>
 <h3 id="running-local-models-with-ollama">Running local models with Ollama<a class="headerlink" href="#running-local-models-with-ollama" title="Permanent link"></a></h3>
 <p>If your laptop has more than 16GB available, you’ll have better results with <code>gpt-oss:20b</code> model:</p>
-<div class="highlight"><pre><span></span><code>```bash
-ollama pull gpt-oss:20b
-```
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ollama<span class="w"> </span>pull<span class="w"> </span>gpt-oss:20b
 </code></pre></div>
 <p>Otherwise, you can use <code>llama3.2:3b</code></p>
-<div class="highlight"><pre><span></span><code>```bash
-ollama pull llama3.2:3b
-```
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ollama<span class="w"> </span>pull<span class="w"> </span>llama3.2:3b
 </code></pre></div>
 <p>Either way, download also the <code>nomic-embed-text:v1.5</code>:</p>
-<div class="highlight"><pre><span></span><code>```bash
-nomic-embed-text:v1.5
-```
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nomic-embed-text:v1.5
 </code></pre></div>
 <h3 id="running-remote-openai-models">Running remote OpenAI models<a class="headerlink" href="#running-remote-openai-models" title="Permanent link"></a></h3>
-<p>If you prefer, you can use an OpenAI API key to complete this workshop.<br>
-If your instructor provided a key, use that one. Otherwise, <a href="https://platform.openai.com/docs/quickstart/create-and-export-an-api-key" target="_blank">create an API key</a>.</p>
+<p>If you prefer, you can use an OpenAI API key to complete this workshop. If your instructor provided a key, use that one. Otherwise, <a href="https://platform.openai.com/docs/quickstart/create-and-export-an-api-key" target="_blank">create an API key</a>.</p>
 <details class="info">
 <summary>No instructor-provided key?</summary>
 <p>New OpenAI developer accounts receive $5 in free trial credits.<br>
