@@ -159,7 +159,7 @@ If you are not able to run Dev Services with Docker or Podman, feel free to use 
 embedding store provided by LangChain4j.
 
 !!! important
-    This is just an emergency solution. If you are able to run Dev Services, please do so.
+    This is just an emergency solution. If you are able to run Dev Services, please skip this section.
 
 If you followed previous section, remove the pgVector changes. Namely, you have to remove the pgVector dependency from the `pom.xml` so the in-memory embedding store can be used:
 
