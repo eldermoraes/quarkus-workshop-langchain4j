@@ -36,25 +36,25 @@
 
 If your laptop has more than 16GB available, you'll have better results with `gpt-oss:20b` model:
 
-    ```bash
-    ollama pull gpt-oss:20b
-    ```
+```bash
+ollama pull gpt-oss:20b
+```
 
 Otherwise, you can use `llama3.2:3b`
 
-    ```bash
-    ollama pull llama3.2:3b
-    ```
+```bash
+ollama pull llama3.2:3b
+```
+
 Either way, download also the `nomic-embed-text:v1.5`:
 
-    ```bash
-    nomic-embed-text:v1.5
-    ```
+```bash
+nomic-embed-text:v1.5
+```
 
 ### Running remote OpenAI models
 
-If you prefer, you can use an OpenAI API key to complete this workshop.  
-If your instructor provided a key, use that one. Otherwise, [create an API key](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key){target="_blank"}.
+If you prefer, you can use an OpenAI API key to complete this workshop. If your instructor provided a key, use that one. Otherwise, [create an API key](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key){target="_blank"}.
 
 ??? info "No instructor-provided key?"
     New OpenAI developer accounts receive $5 in free trial credits.  
