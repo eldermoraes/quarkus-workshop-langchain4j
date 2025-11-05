@@ -153,10 +153,10 @@ Here are your current bookings: 1. Booking ID: 1 - From: 2025-07-10 - To: 2025-0
 Alright, let's try now to cancel an invalid booking:
 
 ```text title="You"
-Can you cancel my booking starting on 2025-07-10?
+Can you cancel my booking starting on 2025-10-06?
 ```
 
-**AI**:  Unfortunately, I cannot cancel your booking starting on 2025-07-10 because the booking period is less than 4 days, and cancellations are not permitted for such bookings. If you have any other questions or need further assistance, please let me know!
+**AI**:  Unfortunately, I cannot cancel your booking because the booking period is less than 4 days, and cancellations are not permitted for such bookings. If you have any other questions or need further assistance, please let me know!
 
 ![type:video](../images/chat-booking.mp4){: style='width: 80%'}
 

@@ -176,18 +176,20 @@ through the use of metrics and cold hard numbers. Using these metrics,
 we can create meaningful graphs, dashboards and alerts.
 
 The (currently) preferred way to gather metrics in Quarkus is to use the micrometer project.
-You can add metrics collection with micrometer by adding the `quarkus-micrometer` extension to the pom.xml.
-You then need to add a collector specific extension to format the metrics accordingly. In the below example
-we have included the `quarkus-micrometer-registry-otlp` extension for the general purpose OpenTelemetry. This extension imports the quarkus-micrometer as well, so no need to specify it implicitly. Add the following dependency to your code:
+You can add metrics collection with micrometer by adding the `quarkus-micrometer` extension to the project.
 
-```xml title="pom.xml"
-        <!-- Export metrics for OpenTelemetry compatible collectors -->
-        <dependency>
-            <groupId>io.quarkiverse.micrometer.registry</groupId>
-            <artifactId>quarkus-micrometer-registry-otlp</artifactId>
-            <version>3.4.1</version>
-        </dependency>
+```shell
+./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer"
 ```
+
+You should also add the `quarkus-micrometer-registry-prometheus` extension which formats the metrics in format that Prometheus can easily ingest: 
+
+```shell
+./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer-registry-prometheus"
+```
+
+By just adding these extensions, your application is now exposing metrics at the http://localhost:8080/q/metrics endpoint. 
+You can also access the metrics by going to the Dev UI where you will see a new card "Micrometer metrics".
 
 By default Quarkus will collect a variety of useful metrics for you by default,
 e.g., CPU and memory usage, garbage collection stats, etc. The LangChain4j extension will add useful metrics
