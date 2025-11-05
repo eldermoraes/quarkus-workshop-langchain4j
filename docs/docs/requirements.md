@@ -99,7 +99,7 @@ Either clone the repository with Git or download a ZIP archive.
 
 ```shell
 git clone https://github.com/eldermoraes/quarkus-workshop-langchain4j.git
-cd quarkus-langchain4j-workshop
+cd quarkus-workshop-langchain4j
 ```
 
 ### Direct Download

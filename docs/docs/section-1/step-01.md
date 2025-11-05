@@ -9,7 +9,7 @@ We are assuming that you are using local gpt-oss:20b model with Ollama. If you a
 It's a simple Quarkus application that uses the [Quarkus LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html){target="_blank"} extension to interact with the LLM.
 It's a simple chatbot that we will extend in the subsequent steps.
 
-Before proceed, make sure your local Ollama is up and running:
+Before proceeding, make sure your local Ollama is up and running:
 
 ```shell
 ollama serve
@@ -36,7 +36,7 @@ Open it and click the red robot icon in the bottom right corner to start chattin
 
 ## Chatting with the chatbot
 
-The chatbot is calling gpt-4o (from OpenAI) via the backend. 
+The chatbot is calling the LLM via the backend. 
 You can test it out and observe that it has memory.
 Example:
 
@@ -50,7 +50,7 @@ AI: Your name is Clement.
 ![An example of discussion with the chatbot](../images/ui.png)
 
 This is how memory is built up for LLMs.
-==In the terminal, you can observe the calls that are made to OpenAI behind the scenes. Notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).==
+==In the terminal, you can observe the calls that are made to the model behind the scenes. Notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).==
 
 ```bash
 # The request -> Sending a message to the LLM
@@ -130,6 +130,7 @@ If you open the `pom.xml` file, you will see that the project is a Quarkus appli
 ```
 
 [Quarkus LangChain4j OpenAI](https://docs.quarkiverse.io/quarkus-langchain4j/dev/openai.html){target="_blank"} is a Quarkus extension that provides a simple way to interact with language models (LLMs), like [gpt-4o from OpenAI](https://platform.openai.com/docs/models/gpt-4o){target="_blank"}.
+
 It actually can interact with any model serving the OpenAI API (like [vLLM](https://docs.vllm.ai/en/latest/){target="_blank"} or [Podman AI Lab](https://podman-desktop.io/docs/ai-lab){target="_blank"}).
 Quarkus LangChain4j abstracts the complexity of calling the model and provides a simple API to interact with it.
 
