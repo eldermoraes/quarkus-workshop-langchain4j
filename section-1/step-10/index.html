@@ -1264,12 +1264,8 @@ the user would still be affected and potentially get an ugly error message.</p>
 should something go wrong, we are able to handle it gracefully.</p>
 <p>Ultimately, calling an LLM is not much different than making traditional REST calls.
 If you’re familiar with <a href="https://microprofile.io" target="_blank">MicroProfile</a>, you may know that it has a specification for how to implement Fault Tolerance. Quarkus implements this feature with the <code>quarkus-smallrye-fault-tolerance</code>
-extension. Go ahead and add it to your <code>pom.xml</code>:</p>
-<div class="highlight"><span class="filename">pom.xml</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">        </span><span class="cm">&lt;!-- Fault Tolerance --&gt;</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>io.quarkus<span class="nt">&lt;/groupId&gt;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>quarkus-smallrye-fault-tolerance<span class="nt">&lt;/artifactId&gt;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+extension. Go ahead and add it to your project:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-D<span class="s2">"quarkus-smallrye-fault-tolerance"</span>
 </code></pre></div>
 <p>The MicroProfile Fault Tolerance spec defines 3 main fault tolerance capabilities:</p>
 <ul>
