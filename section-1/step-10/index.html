@@ -1141,7 +1141,8 @@ You can add metrics collection with micrometer by adding the <code>quarkus-micro
 <p>You should also add the <code>quarkus-micrometer-registry-prometheus</code> extension which formats the metrics in format that Prometheus can easily ingest: </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-D<span class="s2">"extensions=quarkus-micrometer-registry-prometheus"</span>
 </code></pre></div>
-<p>By just adding these extensions, your application is now exposing metrics at the http://localhost:8080/q/metrics endpoint. 
+<p>By just adding these extensions, your application is now exposing metrics at the 
+<a href="http://localhost:8080/q/metrics" target="_blank">http://localhost:8080/q/metrics</a> endpoint. 
 You can also access the metrics by going to the Dev UI where you will see a new card “Micrometer metrics”.</p>
 <p>By default Quarkus will collect a variety of useful metrics for you by default,
 e.g., CPU and memory usage, garbage collection stats, etc. The LangChain4j extension will add useful metrics
@@ -1159,7 +1160,7 @@ about the LLM interactions as well. Such as:</p>
 </code></pre></div>
 <p>You can also customize the metrics collection by adding
 your own custom metrics. You can find more information about how to use Quarkus Micrometer in the
-<a href="https://quarkus.io/guides/micrometer">Quarkus Micrometer documentation</a>.</p>
+<a href="https://quarkus.io/guides/micrometer" target="_blank">Quarkus Micrometer documentation</a>.</p>
 <h3 id="tracing">Tracing<a class="headerlink" href="#tracing" title="Permanent link"></a></h3>
 <p>Tracing is another important aspect of observability.
 It involves tracking the flow of requests and responses through your application,
