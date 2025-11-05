@@ -32,10 +32,26 @@
 
 ## AI Model Requirements
 
-- **llama3.2:3b** - Run this command after installing Ollama:
-    - ```ollama pull llama3.2:3b```
-- If your laptop has more than 16GB available, you'll have better results with gpt-oss model:
-    - ```ollama pull gpt-oss:20b```
+### Running local models with Ollama
+
+If your laptop has more than 16GB available, you'll have better results with `gpt-oss:20b` model:
+
+    ```bash
+    ollama pull gpt-oss:20b
+    ```
+
+Otherwise, you can use `llama3.2:3b`
+
+    ```bash
+    ollama pull llama3.2:3b
+    ```
+Either way, download also the `nomic-embed-text:v1.5`:
+
+    ```bash
+    nomic-embed-text:v1.5
+    ```
+
+### Running remote OpenAI models
 
 If you prefer, you can use an OpenAI API key to complete this workshop.  
 If your instructor provided a key, use that one. Otherwise, [create an API key](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key){target="_blank"}.

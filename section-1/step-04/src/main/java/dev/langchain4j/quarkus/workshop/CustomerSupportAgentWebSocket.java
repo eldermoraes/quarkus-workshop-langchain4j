@@ -3,7 +3,6 @@ package dev.langchain4j.quarkus.workshop;
 import io.quarkus.websockets.next.OnOpen;
 import io.quarkus.websockets.next.OnTextMessage;
 import io.quarkus.websockets.next.WebSocket;
-import io.smallrye.mutiny.Multi;
 
 @WebSocket(path = "/customer-support-agent")
 public class CustomerSupportAgentWebSocket {

@@ -70,6 +70,7 @@ Let's look at the configuration:
 - `quarkus.langchain4j.easy-rag.max-segment-size`: The maximum number of tokens in a segment. Indeed, each document is split into segments (chunks) to be ingested by the LLM. This parameter defines the maximum number of tokens in a segment.
 - `quarkus.langchain4j.easy-rag.max-overlap-size`: The maximum number of tokens to overlap between two segments. So, each segment overlaps with the previous one by this number of tokens. That allows the LLM to have a context between two segments.
 - `quarkus.langchain4j.easy-rag.max-results`: The maximum number of results to return when querying the knowledge base.
+- `quarkus.langchain4j.openai.embedding-model.model-name`: The model used to process the embbedings. You can ommit it if you are using OpenAI API Key.
 
 ## Testing the RAG pattern
 
