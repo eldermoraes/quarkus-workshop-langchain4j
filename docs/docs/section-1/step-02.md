@@ -9,19 +9,22 @@ You can either use the code from `step-01` and continue from there, or check the
 
 ## The configuration
 
-The application is configured from the `src/main/resources/application.properties` file. If you are using OpenAI API Key, it should look like this:
+The application is configured from the `src/main/resources/application.properties` file.
+
+If you are using local gpt-oss:20b with Ollama, it should look like this:
+
+```properties title="application.properties"
+--8<-- "../../section-1/step-01/src/main/resources/application.properties"
+```
+
+If you are using OpenAI API Key, it should look like this:
 
 ```properties title="application.properties"
 --8<-- "../../section-1/step-01/src/main/resources/application.properties.OPENAI"
 ```
 
-The `quarkus.langchain4j.openai.api-key` property is the OpenAI API key. In our case we are configuring it to read from the `OPENAI_API_KEY` environment variable.
+The `quarkus.langchain4j.openai.api-key` property is the OpenAI API key. In this case we are configuring it to read from the `OPENAI_API_KEY` environment variable.
 
-If you are using local gpt-oss:20b with Ollama, it should look like this:
-
-```properties title="application.properties"
---8<-- "../../section-1/step-01/src/main/resources/application.properties.LOCAL"
-```
 
 The rest of the configuration indicates which model is used and whether to log the requests and responses to the model in the terminal.
 
