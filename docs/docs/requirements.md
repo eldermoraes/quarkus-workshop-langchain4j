@@ -98,16 +98,16 @@ Either clone the repository with Git or download a ZIP archive.
 ### With Git
 
 ```shell
-git clone https://github.com/eldermoraes/quarkus-langchain4j-workshop.git
+git clone https://github.com/eldermoraes/quarkus-workshop-langchain4j.git
 cd quarkus-langchain4j-workshop
 ```
 
 ### Direct Download
 
 ```shell
-curl -L -o workshop.zip https://github.com/eldermoraes/quarkus-langchain4j-workshop/archive/refs/heads/main.zip
+curl -L -o workshop.zip https://github.com/eldermoraes/quarkus-workshop-langchain4j/archive/refs/heads/main.zip
 unzip workshop.zip
-cd quarkus-langchain4j-workshop-main
+cd quarkus-workshop-langchain4j-main
 ```
 
 ---
