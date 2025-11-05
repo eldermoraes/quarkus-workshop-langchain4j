@@ -326,6 +326,30 @@ You are not viewing the latest version.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="AI Model Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-local-models-with-ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running local models with Ollama
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-remote-openai-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running remote OpenAI models
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -935,6 +959,30 @@ You are not viewing the latest version.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="AI Model Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-local-models-with-ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running local models with Ollama
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-remote-openai-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running remote OpenAI models
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1102,16 +1150,23 @@ You are not viewing the latest version.
 </ul>
 <hr>
 <h2 id="ai-model-requirements">AI Model Requirements<a class="headerlink" href="#ai-model-requirements" title="Permanent link"></a></h2>
-<ul>
-<li><strong>llama3.2:3b</strong> - Run this command after installing Ollama:<ul>
-<li><code>ollama pull llama3.2:3b</code></li>
-</ul>
-</li>
-<li>If your laptop has more than 16GB available, you’ll have better results with gpt-oss model:<ul>
-<li><code>ollama pull gpt-oss:20b</code></li>
-</ul>
-</li>
-</ul>
+<h3 id="running-local-models-with-ollama">Running local models with Ollama<a class="headerlink" href="#running-local-models-with-ollama" title="Permanent link"></a></h3>
+<p>If your laptop has more than 16GB available, you’ll have better results with <code>gpt-oss:20b</code> model:</p>
+<div class="highlight"><pre><span></span><code>```bash
+ollama pull gpt-oss:20b
+```
+</code></pre></div>
+<p>Otherwise, you can use <code>llama3.2:3b</code></p>
+<div class="highlight"><pre><span></span><code>```bash
+ollama pull llama3.2:3b
+```
+</code></pre></div>
+<p>Either way, download also the <code>nomic-embed-text:v1.5</code>:</p>
+<div class="highlight"><pre><span></span><code>```bash
+nomic-embed-text:v1.5
+```
+</code></pre></div>
+<h3 id="running-remote-openai-models">Running remote OpenAI models<a class="headerlink" href="#running-remote-openai-models" title="Permanent link"></a></h3>
 <p>If you prefer, you can use an OpenAI API key to complete this workshop.<br>
 If your instructor provided a key, use that one. Otherwise, <a href="https://platform.openai.com/docs/quickstart/create-and-export-an-api-key" target="_blank">create an API key</a>.</p>
 <details class="info">
@@ -1128,11 +1183,11 @@ See the <a href="https://openai.com/api/pricing/" target="_blank">OpenAI pricing
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux / macOS</label><label for="__tabbed_1_2">Windows PowerShell</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>&lt;your-key&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>&lt;your-key&gt;
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$Env:OPENAI_API_KEY</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">your-key</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">$Env:OPENAI_API_KEY</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">your-key</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
 </div>
@@ -1141,7 +1196,7 @@ See the <a href="https://openai.com/api/pricing/" target="_blank">OpenAI pricing
 <h2 id="good-to-know">Good to Know<a class="headerlink" href="#good-to-know" title="Permanent link"></a></h2>
 <h3 id="quarkus-dev-mode">Quarkus Dev Mode<a class="headerlink" href="#quarkus-dev-mode" title="Permanent link"></a></h3>
 <p>Run your Quarkus app in <strong>dev mode</strong> from the project directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./mvnw<span class="w"> </span>quarkus:dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./mvnw<span class="w"> </span>quarkus:dev
 </code></pre></div>
 <p>Dev mode automatically recompiles your code on every change.
 Your app will be available at http://localhost:8080/.</p>
@@ -1160,20 +1215,20 @@ Other IDEs (Eclipse, VSCode) support similar remote debugging.</p>
 <h2 id="getting-the-workshop-material">Getting the Workshop Material<a class="headerlink" href="#getting-the-workshop-material" title="Permanent link"></a></h2>
 <p>Either clone the repository with Git or download a ZIP archive.</p>
 <h3 id="with-git">With Git<a class="headerlink" href="#with-git" title="Permanent link"></a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/eldermoraes/quarkus-workshop-langchain4j.git
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>quarkus-workshop-langchain4j
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/eldermoraes/quarkus-workshop-langchain4j.git
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>quarkus-workshop-langchain4j
 </code></pre></div>
 <h3 id="direct-download">Direct Download<a class="headerlink" href="#direct-download" title="Permanent link"></a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>workshop.zip<span class="w"> </span>https://github.com/eldermoraes/quarkus-workshop-langchain4j/archive/refs/heads/main.zip
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>unzip<span class="w"> </span>workshop.zip
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">cd</span><span class="w"> </span>quarkus-workshop-langchain4j-main
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>workshop.zip<span class="w"> </span>https://github.com/eldermoraes/quarkus-workshop-langchain4j/archive/refs/heads/main.zip
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>unzip<span class="w"> </span>workshop.zip
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">cd</span><span class="w"> </span>quarkus-workshop-langchain4j-main
 </code></pre></div>
 <hr>
 <h2 id="pre-warming-caches">Pre-Warming Caches<a class="headerlink" href="#pre-warming-caches" title="Permanent link"></a></h2>
 <p>This workshop requires downloading Maven dependencies and Docker images.
 To avoid bandwidth issues during the session, we recommend pre-downloading them.</p>
 <h3 id="warm-up-maven">Warm up Maven<a class="headerlink" href="#warm-up-maven" title="Permanent link"></a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./mvnw<span class="w"> </span>verify
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>./mvnw<span class="w"> </span>verify
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>

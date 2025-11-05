@@ -1032,6 +1032,7 @@ See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/rag-easy-ra
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">quarkus.langchain4j.easy-rag.max-segment-size</span><span class="o">=</span><span class="s">100</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">quarkus.langchain4j.easy-rag.max-overlap-size</span><span class="o">=</span><span class="s">25</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">quarkus.langchain4j.easy-rag.max-results</span><span class="o">=</span><span class="s">3</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="na">quarkus.langchain4j.openai.embedding-model.model-name</span><span class="o">=</span><span class="s">nomic-embed-text:v1.5</span>
 </code></pre></div>
 <p>Let’s look at the configuration:</p>
 <ul>
@@ -1039,6 +1040,7 @@ See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/rag-easy-ra
 <li><code>quarkus.langchain4j.easy-rag.max-segment-size</code>: The maximum number of tokens in a segment. Indeed, each document is split into segments (chunks) to be ingested by the LLM. This parameter defines the maximum number of tokens in a segment.</li>
 <li><code>quarkus.langchain4j.easy-rag.max-overlap-size</code>: The maximum number of tokens to overlap between two segments. So, each segment overlaps with the previous one by this number of tokens. That allows the LLM to have a context between two segments.</li>
 <li><code>quarkus.langchain4j.easy-rag.max-results</code>: The maximum number of results to return when querying the knowledge base.</li>
+<li><code>quarkus.langchain4j.openai.embedding-model.model-name</code>: The model used to process the embbedings. You can ommit it if you are using OpenAI API Key.</li>
 </ul>
 <h2 id="testing-the-rag-pattern">Testing the RAG pattern<a class="headerlink" href="#testing-the-rag-pattern" title="Permanent link"></a></h2>
 <p>Let’s test the RAG pattern.
