@@ -188,7 +188,8 @@ You should also add the `quarkus-micrometer-registry-prometheus` extension which
 ./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer-registry-prometheus"
 ```
 
-By just adding these extensions, your application is now exposing metrics at the http://localhost:8080/q/metrics endpoint. 
+By just adding these extensions, your application is now exposing metrics at the 
+[http://localhost:8080/q/metrics](http://localhost:8080/q/metrics){target="_blank"} endpoint. 
 You can also access the metrics by going to the Dev UI where you will see a new card "Micrometer metrics".
 
 By default Quarkus will collect a variety of useful metrics for you by default,
@@ -210,7 +211,7 @@ langchain4j_aiservices_seconds_sum{aiservice="PromptInjectionDetectionService",m
 
 You can also customize the metrics collection by adding
 your own custom metrics. You can find more information about how to use Quarkus Micrometer in the
-[Quarkus Micrometer documentation](https://quarkus.io/guides/micrometer).
+[Quarkus Micrometer documentation](https://quarkus.io/guides/micrometer){target="_blank"}.
 
 ### Tracing
 
