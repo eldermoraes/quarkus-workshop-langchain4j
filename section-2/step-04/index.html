@@ -3152,8 +3152,8 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 <hr>
 <h2 id="experiment-further">Experiment Further<a class="headerlink" href="#experiment-further" title="Permanent link"></a></h2>
 <h3 id="1-add-agent-discovery">1. Add Agent Discovery<a class="headerlink" href="#1-add-agent-discovery" title="Permanent link"></a></h3>
-<p>The AgentCard is published at <code>http://localhost:8888/card</code>. Try:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>curl<span class="w"> </span>http://localhost:8888/card<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<p>The AgentCard is published at <code>http://localhost:8888/.well-known/agent-card.json</code>. Try:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>curl<span class="w"> </span>http://localhost:8888/.well-known/agent-card.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
 </code></pre></div>
 <p>You’ll see the full agent description including skills, capabilities, and transport protocols.</p>
 <h3 id="2-test-different-disposition-scenarios">2. Test Different Disposition Scenarios<a class="headerlink" href="#2-test-different-disposition-scenarios" title="Permanent link"></a></h3>
