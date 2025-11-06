@@ -452,10 +452,14 @@ Does the agent automatically learn to use it?
     Then restart the application.
 
 ??? warning "Tool methods not being called"
-    List of verification: 1) Verify the tool uses `@Dependent` scope; 2) Check that the `@Tool` annotation is present; 3) Ensure the tool is properly referenced in `@ToolBox`
+    - Verify the tool uses `@Dependent` scope
+    - Check that the `@Tool` annotation is present
+    - Ensure the tool is properly referenced in `@ToolBox`
 
 ??? warning "Agent always/never calls the tool"
-    List of verification: 1) Review your `@SystemMessage` — is it clear about when to use the tool?; 2) Try adding more explicit instructions; 3) Consider providing examples in the system message
+    - Review your `@SystemMessage` — is it clear about when to use the tool?
+    - Try adding more explicit instructions
+    - Consider providing examples in the system message
 
 ---
 
