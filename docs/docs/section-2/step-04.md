@@ -864,10 +864,10 @@ This separation allows:
 
 ### 1. Add Agent Discovery
 
-The AgentCard is published at `http://localhost:8888/card`. Try:
+The AgentCard is published at `http://localhost:8888/.well-known/agent-card.json`. Try:
 
 ```bash
-curl http://localhost:8888/card | jq
+curl http://localhost:8888/.well-known/agent-card.json | jq
 ```
 
 You'll see the full agent description including skills, capabilities, and transport protocols.
