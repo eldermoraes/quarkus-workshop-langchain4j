@@ -2097,17 +2097,19 @@ Does the agent automatically learn to use it?</p>
 <details class="warning">
 <summary>Tool methods not being called</summary>
 </details>
-<p>List of items to be checked:
-- Verify the tool uses <code>@Dependent</code> scope
-- Check that the <code>@Tool</code> annotation is present
-- Ensure the tool is properly referenced in <code>@ToolBox</code></p>
+<ul>
+<li>Verify the tool uses <code>@Dependent</code> scope</li>
+<li>Check that the <code>@Tool</code> annotation is present</li>
+<li>Ensure the tool is properly referenced in <code>@ToolBox</code></li>
+</ul>
 <details class="warning">
 <summary>Agent always/never calls the tool</summary>
 </details>
-<p>Make sure to:
-- Review your <code>@SystemMessage</code> — is it clear about when to use the tool?
-- Try adding more explicit instructions
-- Consider providing examples in the system message</p>
+<ul>
+<li>Review your <code>@SystemMessage</code> — is it clear about when to use the tool?</li>
+<li>Try adding more explicit instructions</li>
+<li>Consider providing examples in the system message</li>
+</ul>
 <hr>
 <h2 id="whats-next">What’s Next?<a class="headerlink" href="#whats-next" title="Permanent link"></a></h2>
 <p>In this step, you built a <strong>single autonomous agent</strong> that makes decisions and uses tools.</p>
