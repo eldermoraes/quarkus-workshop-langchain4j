@@ -1588,7 +1588,11 @@ Here’s the business process:</p>
 <ul>
 <li>Completed Section 1 (or you are familiar with Quarkus LangChain4j basics)</li>
 <li>JDK 21+ installed</li>
+<li>AI Model<ul>
+<li>Local Ollama running gpt-oss:20b (or llama3.2:3b if you have less than 16GB RAM), or;</li>
 <li>OpenAI API key set as <code>OPENAI_API_KEY</code> environment variable</li>
+</ul>
+</li>
 <li>A container runtime (Docker/Podman) for running a PostgreSQL <a href="https://quarkus.io/guides/databases-dev-services">Dev Service</a></li>
 </ul>
 <hr>
@@ -2092,6 +2096,7 @@ Does the agent automatically learn to use it?</p>
 </details>
 <details class="warning">
 <summary>Tool methods not being called</summary>
+<p>List of items to be checked:</p>
 </details>
 <ul>
 <li>Verify the tool uses <code>@Dependent</code> scope</li>
@@ -2100,6 +2105,7 @@ Does the agent automatically learn to use it?</p>
 </ul>
 <details class="warning">
 <summary>Agent always/never calls the tool</summary>
+<p>Make sure to:</p>
 </details>
 <ul>
 <li>Review your <code>@SystemMessage</code> — is it clear about when to use the tool?</li>
