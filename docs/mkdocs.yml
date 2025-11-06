@@ -18,7 +18,6 @@ nav:
     - Step 10 - Observability and Fault Tolerance: 'section-1/step-10.md'
     #- Step 11 - Serving the model in pure Java with Jlama: 'section-1/step-11.md'
   - Section 2 - Agentic Workflows:
-    - 'section-2/step-01.md'
     - Step 1 - Implementing AI Agents: 'section-2/step-01.md'
     - Step 2 - Composing simple agent workflows: 'section-2/step-02.md'
     - Step 3 - Building nested agent workflows: 'section-2/step-03.md'
