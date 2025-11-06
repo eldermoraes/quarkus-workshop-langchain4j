@@ -54,7 +54,9 @@ Before starting, ensure you have:
 
 - Completed Section 1 (or you are familiar with Quarkus LangChain4j basics)
 - JDK 21+ installed
-- OpenAI API key set as `OPENAI_API_KEY` environment variable
+- AI Model
+    - Local Ollama running gpt-oss:20b (or llama3.2:3b if you have less than 16GB RAM), or;
+    - OpenAI API key set as `OPENAI_API_KEY` environment variable
 - A container runtime (Docker/Podman) for running a PostgreSQL [Dev Service](https://quarkus.io/guides/databases-dev-services)
 
 ---
@@ -450,11 +452,15 @@ Does the agent automatically learn to use it?
     Then restart the application.
 
 ??? warning "Tool methods not being called"
+    List of items to be checked:
+
    - Verify the tool uses `@Dependent` scope
    - Check that the `@Tool` annotation is present
    - Ensure the tool is properly referenced in `@ToolBox`
 
 ??? warning "Agent always/never calls the tool"
+    Make sure to:
+
    - Review your `@SystemMessage` — is it clear about when to use the tool?
    - Try adding more explicit instructions
    - Consider providing examples in the system message
