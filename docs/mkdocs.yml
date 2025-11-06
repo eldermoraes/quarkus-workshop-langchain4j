@@ -23,6 +23,10 @@ nav:
     - Step 3 - Building nested agent workflows: 'section-2/step-03.md'
     - Step 4 - Using remote agents (A2A): 'section-2/step-04.md'
     - Mastering Agentic Systems: 'section-2/conclusion.md'
+  - Section 3 - Deploying to Kubernetes:
+    - Step 1 - Implementing XXX: 'xxx'
+    - Step 2 - Implementing YYY: 'yyy'
+    - Step 3 - Implementing ZZZ: 'zzz'
   - Conclusion: 'conclusion.md'
 
 
