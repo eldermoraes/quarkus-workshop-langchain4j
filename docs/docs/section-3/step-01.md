@@ -44,36 +44,45 @@ Before starting, ensure you have:
 
 ## Running the Application
 
-Navigate to the `section-2/step-01` directory and start the application:
+Navigate to the `section-3/step-01` directory and start the application:
 
 === "Linux / macOS"
     ```bash
-    cd section-2/step-01
+    cd section-3/step-01
     ./mvnw quarkus:dev
     ```
 
 === "Windows"
     ```cmd
-    cd section-2\step-01
+    cd section-3\step-01
     mvnw quarkus:dev
     ```
 
 Once started, open your browser to [http://localhost:8080](http://localhost:8080){target="_blank"}.
 
-### Understanding the UI
+Do it just to make sure that you application is working properly and that you OpenAI API Key is properly configured. 
+If so, you can stop your application (CTRL+C) so we can work on it. 
 
-The application has two main sections:
+### Adding the Kubernetes and Jib extensions
 
-1. **Fleet Status** (top): Shows all cars in the Miles of Smiles fleet with their current status
-2. **Returns** (bottom): Displays cars that are currently rented or at the car wash
+Here we’ll be using the Quarkus Kubernetes extension to create the Kubernetes deployment file, and the Quarkus Jib Extension to create and push the container image to your container registry without the need of a local Podman/Docker instance.
 
-![Agentic App UI](../images/agentic-UI-1.png){: .center}
+```shell
+./mvnw quarkus:add-extension -Dextensions="quarkus-kubernetes,quarkus-container-image-jib"
+```
+
+- Kubernetes extension: offers the ability to automatically generate Kubernetes resources based on defaults and user-supplied configuration
+- Container Image Jib: is powered by [Jib](https://github.com/GoogleContainerTools/jib){target="_blank"} for performing container image builds. The major benefit of using Jib with Quarkus is that all the dependencies (everything found under target/lib) are cached in a different layer than the actual application, making rebuilds really fast and small (when it comes to pushing). Another important benefit of using this extension is that it provides the ability to create a container image without having to have any dedicated client side tooling (like Docker) or running daemon processes (like the Docker daemon) when all that is needed is the ability to push to a container image registry.
 
 ---
 
-## Try It Out
+## Adding the configuration properties
 
-Let's see the agent in action!
+Add the following properties to your application.properties so that you can push the container to the correct location:
+
+```properties title="application.properties"
+--8<-- "../../section-3/step-01/src/main/resources/application.properties:container-image"
+```
 
 ### Test 1: Car Needs Cleaning
 
