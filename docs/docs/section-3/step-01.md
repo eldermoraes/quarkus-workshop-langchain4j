@@ -39,6 +39,7 @@ Before starting, ensure you have:
     - When you see a list of Red Hat products to try on Sandbox, choose “OpenShift”
 - **OpenShift Command Line Interface (CLI)** – [follow the instructions](https://developers.redhat.com/learn/openshift/download-and-install-red-hat-openshift-cli){target="_blank"} after provisioning your Sandbox account
 - **kubectl** – [Download and install](https://kubernetes.io/docs/tasks/tools/#kubectl){target="_blank"}
+- **Docker Hub Account** - [Register here](https://hub.docker.com/){target="_blank"}
 
 ---
 
@@ -78,385 +79,75 @@ Here we’ll be using the Quarkus Kubernetes extension to create the Kubernetes 
 
 ## Adding the configuration properties
 
-Add the following properties to your application.properties so that you can push the container to the correct location:
+Add the following properties to your `src/main/resources/application.properties` so that you can push the container to the correct location:
 
 ```properties title="application.properties"
 --8<-- "../../section-3/step-01/src/main/resources/application.properties:container-image"
 ```
 
-### Test 1: Car Needs Cleaning
+Let's understand these properties:
 
-Act as a rental team member processing a car return. In the **Returns > Rental Return** section, select a car and enter this feedback:
+- quarkus.container-image.registry: the containers registry where we'll host our images. Here we are using Docker Hub, but it could be any other one. 
+- quarkus.container-image.group: your account name at Docker Hub (or at the registry that you chose).
+- quarkus.container-image.name: the name of your application/deployment.
+- quarkus.container-image.tag: version tag.
+- quarkus.kubernetes.service-type: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use `load-balancer`. In our case, using Openshift Developer Sandbox, we'll use `ClusterIP` and then expose it for external access (more about it in a bit).
+- quarkus.kubernetes-client.trust-certs: for demo purposes, we are using self-signed certs, so we need to trust them.
 
-```
-Car has dog hair all over the back seat
-```
-
-Click the **Return** button.
-
-**What happens?**
-
-- The agent analyzes the feedback
-- Recognizes the car needs cleaning
-- Calls the `CarWashTool` to request interior cleaning
-- Updates the car's status to `AT_CAR_WASH`
-
-Check your terminal logs (you may need to scroll up). You should see output like:
-
-```
-🚗 CarWashTool result: Car wash requested for Mercedes-Benz C-Class (2020), Car #6:
-- Interior cleaning
-Additional notes: Interior cleaning required due to dog hair in back seat.
-```
-
-### Test 2: Car Is Clean
-
-Now try returning a car that's already clean:
-
-```
-Car looks good
-```
-
-**What happens?**
-
-- The agent analyzes the feedback
-- Determines no cleaning is needed
-- Returns `CARWASH_NOT_REQUIRED` (no tool call made)
-- Updates the car's status to `AVAILABLE`
-
-In your logs, you'll see the agent's response contains:
-
-```
-"content":"CARWASH_NOT_REQUIRED"
-```
-
-Notice how the agent **made a decision** without calling the car wash tool. This demonstrates reasoning!
+!!! important "User your own configurations"
+    Change `docker.io` to your container registry (if using another one) and `eldermoraes` to your own account. If you don’t, your push ==will fail==.
 
 ---
 
-## Building Agents with Quarkus LangChain4j
+## Authenticating to the registry and connecting to the Kubernetes cluster
 
-The [langchain4j-agentic](https://github.com/langchain4j/langchain4j/tree/main/langchain4j-agentic){target="_blank"} module introduces the ability to create AI Agents.
-This module is available in Quarkus using the `quarkus-langchain4j-agentic` module.
-If you open the `pom.xml` file from the project, you will see this dependency:
+In order to push the container image, you need to authenticate to your container registry:
 
-```xml
-<dependency>
-    <groupId>io.quarkiverse.langchain4j</groupId>
-    <artifactId>quarkus-langchain4j-agentic</artifactId>
-</dependency>
+```shell
+podman login docker.io
 ```
 
-### Key Concepts
+We need also to connect our terminal to our remote Kubernetes instance on Openshift Developer Sandbox. 
+Open your instance dashboard and click on your username, which is in the top right corner of the screen:
 
-Agents share similarities with AI Services from Section 1:
+![OpenShift Developer Sandbox Dashboard](../images/openshift-sandbox-dashboard.png)
 
-- Declared as interfaces (implementation generated automatically)
-- Use `@SystemMessage` to define the agent's role and behavior
-- Use `@UserMessage` to provide request-specific context
-- Can be assigned **tools** to perform actions
-- Support both programmatic and declarative (annotation-based) definitions, even if in Quarkus, we recommend the declarative approach
+Pay attention at the yellow box in the top right corner: you'll see your username at the platform. When you click it, you'll see this:
 
-### Key Differences
+![User menu commands](../images/openshift-sandbox-clicked.png)
 
-- **Only one method** per interface can be annotated with `@Agent` - this is the agent entry point
-- Designed to be composed with for **workflows** or be invoked by a supervisor — agents can be composed together (more on this in Step 02)
-- Focus on **autonomous actions** rather than conversational responses
+- Click the "Copy login command" option. 
+- It will open another page with a "Display Token" link; click it.
+- It will open a page like this:
 
----
+![OpenShift Developer Sandbox Token](../images/openshift-sandbox-token.png)
 
-## Understanding the Application Architecture
+Copy the command under the "Log in with this token" label. 
+This command needs to be executed on your terminal. It will be something like this:
 
-![App Blueprint](../images/agentic-app-1.png){: .center}
-
-The application consists of four main components:
-
-1. **CarManagementResource**: REST API endpoints
-2. **CarManagementService**: Business logic and agent orchestration
-3. **CarWashAgent**: AI agent that decides if cleaning is needed
-4. **CarWashTool**: Tool that requests car wash services
-
-Let's explore each component.
-
----
-
-## Component 1: REST API Endpoints
-
-The `CarManagementResource` provides REST APIs to handle car returns:
-
-```java hl_lines="19 22 41 44" title="CarManagementResource.java"
---8<-- "../../section-2/step-01/src/main/java/com/carmanagement/resource/CarManagementResource.java:car-management"
+```shell
+oc login --token=sha256~[YOUR TOKEN] --server=https://api.[YOUR INSTANCE].openshiftapps.com:6443
 ```
 
-**Key Points:**
+After execution, expect to see this:
 
-- The `processRentalReturn` method (endpoint `/car-management/rental-return/{carNumber}`):  Accepts feedback from the rental team
-- The `processCarWashReturn` method (endpoint `/car-management/car-wash-return/{carNumber}`): Accepts feedback from the car wash team
-- Both endpoints delegate to `CarManagementService.processCarReturn`
+```Bash title="Example Terminal Output"
+Logged into "https://api.[YOUR INSTANCE].openshiftapps.com:6443" as "elder-moraes" using the token provided.
 
----
+You have access to the following projects and can switch between them with 'oc project <projectname>':
 
-## Component 2: Business Logic & Agent Invocation
+  * elder-moraes-dev
+    openshift-virtualization-os-images
 
-The `CarManagementService` orchestrates the car return process:
-
-```java hl_lines="37-43 45-47" title="CarManagementService.java"
---8<-- "../../section-2/step-01/src/main/java/com/carmanagement/service/CarManagementService.java"
+Using project "elder-moraes-dev".
 ```
 
-**Key Points:**
+If you got here, you are ready to deploy your application to Kubernetes.
 
-- The `CarWashAgent` field is injected as a CDI bean
-- In the `processCarReturn` method, the agent is invoked with car details and feedback. The response is checked for `CARWASH_NOT_REQUIRED`:
-    * If found → Car marked as `AVAILABLE`
-    * If not found → Car stays `AT_CAR_WASH` (tool was called)
+## Deploy the application to your Kubernetes cluster
 
-This simple pattern allows you to ***integrate autonomous decision-making into your business logic***!
+By using the Kubernetes extension that we added before, we can deploy our application by executing one single line of command:
 
----
-
-## Component 3: The CarWashAgent
-
-Here's where the *magic* happens — the AI agent definition:
-
-```java hl_lines="19 32-33" title="CarWashAgent.java"
---8<-- "../../section-2/step-01/src/main/java/com/carmanagement/agentic/agents/CarWashAgent.java"
+```shell
+./mvnw quarkus:package -DskipTests -D"quarkus.kubernetes.deploy=true"
 ```
-
-**Let's break it down:**
-
-### `@SystemMessage`
-Defines the agent's **role** and **decision-making logic**:
-
-- Acts as the intake specialist for the car wash department
-- Should call the `requestCarWash` function in the `CarWashTool` when cleaning is needed
-- Should be specific about which services to request
-- Should return `CARWASH_NOT_REQUIRED` if no cleaning is needed
-
-!!! tip "Pro Tip: Clear Instructions Matter"
-    The system message is critical! It tells the agent:
-
-    - **WHO** it is (car wash intake specialist)
-    - **WHAT** to do (submit car wash requests)
-    - **WHEN** to act (based on feedback)
-    - **HOW** to respond (specific services or `CARWASH_NOT_REQUIRED`)
-
-### `@UserMessage` 
-Provides **context** for each request using template variables:
-
-- Car details: `{carMake}`, `{carModel}`, `{carYear}`, `{carNumber}`
-- Feedback sources: `{rentalFeedback}`, `{carWashFeedback}`
-
-These variables are automatically populated from the method parameters.
-
-### `@Agent`
-Marks this as an **agent method** — only one per interface.
-
-- Provides a description: "Car wash specialist. Determines what car wash services are needed."
-- This description can be used by other agents or systems to understand this agent's purpose
-
-### `@ToolBox`
-Assigns the `CarWashTool` to this agent:
-
-- The agent can call methods in this tool to perform actions
-- The LLM decides when and how to use the tool based on the task (function calling has been covered in the Section 1 of the workshop)
-
-### Method Signature
-Defines the inputs and output:
-
-- **Inputs**: All the context the agent needs to make decisions
-- **Output**: `String` — the agent's response (either tool result or `CARWASH_NOT_REQUIRED`)
-
-!!! info "No Implementation Required"
-    Notice there's **no method body**! LangChain4j automatically generates the implementation:
-
-    1. Receives the inputs
-    2. Sends the system + user messages to the LLM
-    3. If the LLM wants to call the tool, it does so
-    4. Returns the final response
-
----
-
-## Component 4: The CarWashTool
-
-Tools enable agents to take **actions** in the real world:
-
-```java hl_lines="4 21 40 47-48" title="CarWashTool.java"
---8<-- "../../section-2/step-01/src/main/java/com/carmanagement/agentic/tools/CarWashTool.java:CarWashTool"
-```
-
-**Key Points:**
-
-- `@Dependent` scope is required (see explanation below)
-- `@Tool` annotation exposes this method to agents
-    - The description helps the LLM understand when to use this tool
-    - Parameters define what information the agent must provide
-- The method updates the car status to `AT_CAR_WASH`, if the `carInfo` is not `null`
-- The method returns a summary of the request (and prints a log messages)
-
-### Understanding Tool Execution Flow
-
-Here is the sequence of actions happening when the agent is invoked:
-
-1. Agent receives car return feedback (entered by the user)
-2. LLM analyzes the feedback
-3. LLM decides to call `requestCarWash` (or not, depending on the feedback)
-4. If called, LLM determines which parameters to use:
-     - Should `interiorCleaning` be true?
-     - Should `exteriorWash` be true?
-     - What `requestText` should be included?
-5. Tool executes and returns a result
-6. Agent receives the result and can respond
-
-??? question "Why do we use @Dependent scope for the Tool?"
-    When a tool is added to an agent, LangChain4j introspects the tool object to find methods with `@Tool` annotations.
-
-    **The problem with other scopes:**
-    CDI creates proxies for beans with scopes like `@ApplicationScoped` or `@SessionScoped`. These proxy objects don't preserve the `@Tool` annotations, so LangChain4j can't detect them.
-
-    **The solution:**
-    Use `@Dependent` scope, which doesn't create proxies, allowing LangChain4j to see the annotations directly.
-
-    **Alternative:**
-    If you need other CDI scopes, you can use a `ToolProvider` to manually register tools (not covered in this workshop).
-
----
-
-## How It All Works Together
-
-Let's trace through a complete example:
-
-### Scenario: Dog Hair in Back Seat
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant REST as CarManagementResource
-    participant Service as CarManagementService
-    participant Agent as CarWashAgent
-    participant LLM as OpenAI LLM
-    participant Tool as CarWashTool
-
-    User->>REST: POST /rental-return/6<br/>feedback: "Dog hair in back seat"
-    REST->>Service: processCarReturn(6, "Dog hair...", "")
-    Service->>Agent: processCarWash(...)
-    Agent->>LLM: System: You handle car wash intake...<br/>User: Car #6, feedback: "Dog hair..."
-    LLM->>LLM: Analyze feedback<br/>Decision: Needs interior cleaning
-    LLM->>Tool: requestCarWash(<br/>  carNumber: 6,<br/>  interiorCleaning: true,<br/>  requestText: "Dog hair removal"<br/>)
-    Tool->>Tool: Update car status to AT_CAR_WASH
-    Tool-->>LLM: "Car wash requested: Interior cleaning..."
-    LLM-->>Agent: "Car wash requested: Interior cleaning..."
-    Agent-->>Service: "Car wash requested: Interior cleaning..."
-    Service->>Service: Check if contains "CARWASH_NOT_REQUIRED"<br/>No → Keep status AT_CAR_WASH
-    Service-->>REST: Result message
-    REST-->>User: 200 OK
-```
-
-### Scenario: Car Looks Good
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant REST as CarManagementResource
-    participant Service as CarManagementService
-    participant Agent as CarWashAgent
-    participant LLM as OpenAI LLM
-
-    User->>REST: POST /rental-return/3<br/>feedback: "Car looks good"
-    REST->>Service: processCarReturn(3, "Car looks good", "")
-    Service->>Agent: processCarWash(...)
-    Agent->>LLM: System: You handle car wash intake...<br/>User: Car #3, feedback: "Car looks good"
-    LLM->>LLM: Analyze feedback<br/>Decision: No cleaning needed
-    LLM-->>Agent: "CARWASH_NOT_REQUIRED"
-    Agent-->>Service: "CARWASH_NOT_REQUIRED"
-    Service->>Service: Check if contains "CARWASH_NOT_REQUIRED"<br/>Yes → Set status to AVAILABLE
-    Service-->>REST: Result message
-    REST-->>User: 200 OK
-```
-
----
-
-## Key Takeaways
-
-**Agents are autonomous**: They make decisions and take actions based on context.
-**Tools enable actions**: Agents use tools to interact with systems (databases, APIs, etc.)
-**Clear prompts matter**: The `@SystemMessage` guides the agent's decision-making
-**Type-safe interfaces**: No manual API calls — just define interfaces and let Quarkus LangChain4j handle the rest
-**CDI integration**: Agents and tools are managed beans that integrate seamlessly with Quarkus
-
----
-
-## Experiment Further
-
-Try these experiments to deepen your understanding:
-
-### 1. Test Edge Cases
-
-Try different feedback scenarios:
-
-```
-The trunk smells like fish
-```
-
-```
-Minor scratch on the bumper
-```
-
-```
-Spotless condition
-```
-
-What does the agent decide for each? Does it call the car wash tool?
-
-### 2. Modify the System Message
-
-Edit `CarWashAgent.java` and change the system message. For example:
-
-```java
-@SystemMessage("""
-    You are a very picky car wash intake specialist.
-    Request a full detail (exterior, interior, waxing, detailing)
-    unless the car is absolutely perfect.
-    If perfect, respond with "CARWASH_NOT_REQUIRED".
-    """)
-```
-
-How does this change the agent's behavior?
-
-### 3. Add More Tool Parameters
-
-Edit `CarWashTool.java` to add a `tireCleaning` parameter. 
-Does the agent automatically learn to use it?
-
----
-
-## Troubleshooting
-
-??? warning "Error: OPENAI_API_KEY not set"
-    Make sure you've exported the environment variable:
-
-    ```bash
-    export OPENAI_API_KEY=sk-your-key-here
-    ```
-
-    Then restart the application.
-
-??? warning "Tool methods not being called"
-    - Verify the tool uses `@Dependent` scope
-    - Check that the `@Tool` annotation is present
-    - Ensure the tool is properly referenced in `@ToolBox`
-
-??? warning "Agent always/never calls the tool"
-    - Review your `@SystemMessage` — is it clear about when to use the tool?
-    - Try adding more explicit instructions
-    - Consider providing examples in the system message
-
----
-
-## What's Next?
-
-In this step, you built a **single autonomous agent** that makes decisions and uses tools.
-
-In **Step 02**, you'll learn how to compose **multiple agents into workflows** — where agents collaborate to solve complex problems together!
-
-[Continue to Step 02 - Composing Simple Agent Workflows](step-02.md)

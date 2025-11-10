@@ -20,6 +20,7 @@
 - **kubectl** – [Download and install](https://kubernetes.io/docs/tasks/tools/#kubectl){target="_blank"}
 - **Ollama** – [Download and install](https://ollama.com/download){target="_blank"}
 - **Quarkus CLI** - [Installation guide](https://quarkus.io/guides/cli-tooling){target="_blank"}
+- **Docker Hub Account** - [Register here](https://hub.docker.com/){target="_blank"}
 
 
 
