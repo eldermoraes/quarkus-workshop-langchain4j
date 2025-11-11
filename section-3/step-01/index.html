@@ -20,7 +20,7 @@
     
     
       
-        <title>Step 1 - Step 01 - Deploying to Kubernetes - Quarkus LangChain4j Workshop</title>
+        <title>Step 1 - Deploying to Kubernetes - Quarkus LangChain4j Workshop</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#step-01-deploying-to-kubernetes" class="md-skip">
+        <a href="#step-1-deploying-to-kubernetes" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@ You are not viewing the latest version.
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Step 1 - Step 01 - Deploying to Kubernetes
+              Step 1 - Deploying to Kubernetes
             
           </span>
         </div>
@@ -766,7 +766,7 @@ You are not viewing the latest version.
           
   
   <span class="md-ellipsis">
-    Step 1 - Step 01 - Deploying to Kubernetes
+    Step 1 - Deploying to Kubernetes
   </span>
   
 
@@ -777,7 +777,7 @@ You are not viewing the latest version.
         
   
   <span class="md-ellipsis">
-    Step 1 - Step 01 - Deploying to Kubernetes
+    Step 1 - Deploying to Kubernetes
   </span>
   
 
@@ -888,6 +888,30 @@ You are not viewing the latest version.
       Deploy the application to your Kubernetes cluster
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Deploy the application to your Kubernetes cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide your OpenAI API Key to your application at the Kubernetes environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expose-your-kubernetes-service-for-external-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose your Kubernetes service for external access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1044,6 +1068,30 @@ You are not viewing the latest version.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Deploy the application to your Kubernetes cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide your OpenAI API Key to your application at the Kubernetes environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expose-your-kubernetes-service-for-external-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose your Kubernetes service for external access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1064,7 +1112,7 @@ You are not viewing the latest version.
   
 
 
-<div><h1 id="step-01-deploying-to-kubernetes">Step 01 - Deploying to Kubernetes<a class="headerlink" href="#step-01-deploying-to-kubernetes" title="Permanent link"></a></h1>
+<div><h1 id="step-1-deploying-to-kubernetes">Step 1 - Deploying to Kubernetes<a class="headerlink" href="#step-1-deploying-to-kubernetes" title="Permanent link"></a></h1>
 <h2 id="welcome-to-section-3-deploying-to-kubernetes">Welcome to Section 3: Deploying to Kubernetes<a class="headerlink" href="#welcome-to-section-3-deploying-to-kubernetes" title="Permanent link"></a></h2>
 <p>Congratulations on completing Section 1 and/or 2! You’ve learned how to build AI-infused applications with chatbots, RAG patterns, and function calling, and/or also autonomous AI agents that can work together to solve complex, multi-step problems.</p>
 <p>In <strong>Section 3</strong>, we’re shifting gears to learn how to deploy our AI-infused applications to a Kubernetes instance. Thanks to the Kubernetes-Native approach used by Quarkus, this will be a super easy task.</p>
@@ -1142,12 +1190,12 @@ If so, you can stop your application (CTRL+C) so we can work on it. </p>
 </code></pre></div>
 <p>Let’s understand these properties:</p>
 <ul>
-<li>quarkus.container-image.registry: the containers registry where we’ll host our images. Here we are using Docker Hub, but it could be any other one. </li>
-<li>quarkus.container-image.group: your account name at Docker Hub (or at the registry that you chose).</li>
-<li>quarkus.container-image.name: the name of your application/deployment.</li>
-<li>quarkus.container-image.tag: version tag.</li>
-<li>quarkus.kubernetes.service-type: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use <code>load-balancer</code>. In our case, using Openshift Developer Sandbox, we’ll use <code>ClusterIP</code> and then expose it for external access (more about it in a bit).</li>
-<li>quarkus.kubernetes-client.trust-certs: for demo purposes, we are using self-signed certs, so we need to trust them.</li>
+<li><strong>quarkus.container-image.registry</strong>: the containers registry where we’ll host our images. Here we are using Docker Hub, but it could be any other one. </li>
+<li><strong>quarkus.container-image.group</strong>: your account name at Docker Hub (or at the registry that you chose).</li>
+<li><strong>quarkus.container-image.name</strong>: the name of your application/deployment.</li>
+<li><strong>quarkus.container-image.tag</strong>: version tag.</li>
+<li><strong>quarkus.kubernetes.service-type</strong>: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use <code>load-balancer</code>. In our case, using Openshift Developer Sandbox, we’ll use <code>ClusterIP</code> and then expose it for external access (more about it in a bit).</li>
+<li><strong>quarkus.kubernetes-client.trust-certs</strong>: for demo purposes, we are using self-signed certs, so we need to trust them.</li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">User your own configurations</p>
@@ -1186,8 +1234,37 @@ This command needs to be executed on your terminal. It will be something like th
 <p>If you got here, you are ready to deploy your application to Kubernetes.</p>
 <h2 id="deploy-the-application-to-your-kubernetes-cluster">Deploy the application to your Kubernetes cluster<a class="headerlink" href="#deploy-the-application-to-your-kubernetes-cluster" title="Permanent link"></a></h2>
 <p>By using the Kubernetes extension that we added before, we can deploy our application by executing one single line of command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./mvnw<span class="w"> </span>quarkus:package<span class="w"> </span>-DskipTests<span class="w"> </span>-D<span class="s2">"quarkus.kubernetes.deploy=true"</span>
-</code></pre></div></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dquarkus.kubernetes.deploy<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<p>Once the deployment is done, you still need to perform two steps before testing it:</p>
+<ul>
+<li>Provide your OpenAI API Key to your application at the Kubernetes environment</li>
+<li>Expose your Kubernetes service for external access</li>
+</ul>
+<p>Let’s do them both.</p>
+<h3 id="provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment">Provide your OpenAI API Key to your application at the Kubernetes environment<a class="headerlink" href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" title="Permanent link"></a></h3>
+<p>The command below will use your local environment variable to set the environment variable on Kubernetes. </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>env<span class="w"> </span>deployment/quarkus-langchain4j-workshop-3-01<span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="si">${</span><span class="nv">OPENAI_API_KEY</span><span class="si">}</span>
+</code></pre></div>
+<h3 id="expose-your-kubernetes-service-for-external-access">Expose your Kubernetes service for external access<a class="headerlink" href="#expose-your-kubernetes-service-for-external-access" title="Permanent link"></a></h3>
+<p>Let’s create a route to our service, which will allow external access to our application:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>oc<span class="w"> </span>expose<span class="w"> </span>service<span class="w"> </span>quarkus-langchain4j-workshop-3-01
+</code></pre></div>
+<p>Now we need to get the DNS (route) created for our application:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>routes
+</code></pre></div>
+<div class="highlight"><span class="filename">Example Terminal Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>NAME<span class="w">                                </span>HOST/PORT<span class="w">                                                             </span>PATH<span class="w">   </span>SERVICES<span class="w">                            </span>PORT<span class="w">   </span>TERMINATION<span class="w">   </span>WILDCARD
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>quarkus-langchain4j-workshop-3-01<span class="w">   </span>quarkus-langchain4j-workshop-3-01-<span class="o">[</span>YOUR<span class="w"> </span>INSTANCE<span class="o">]</span>.openshiftapps.com<span class="w">          </span>quarkus-langchain4j-workshop-3-01<span class="w">   </span>http<span class="w">                 </span>None
+</code></pre></div>
+<p>So, to access your application, you need to concatenate:</p>
+<ul>
+<li>PORT: http (<mark>not https</mark>)</li>
+<li>HOST/PORT: copy your DNS</li>
+</ul>
+<p>In the example above, my application URL would be:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>http://quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com
+</code></pre></div>
+<p>Just copy the address created for your application, paste to your browser and use your AI-infused application as you did before.</p></div>
 
 
 
