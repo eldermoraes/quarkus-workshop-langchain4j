@@ -45,17 +45,17 @@ Before starting, ensure you have:
 
 ## Running the Application
 
-Navigate to the `section-3/step-01` directory and start the application:
+Navigate to the `section-1/step-05` directory and start the application:
 
 === "Linux / macOS"
     ```bash
-    cd section-3/step-01
+    cd section-1/step-05
     ./mvnw quarkus:dev
     ```
 
 === "Windows"
     ```cmd
-    cd section-3\step-01
+    cd section-1\step-05
     mvnw quarkus:dev
     ```
 
@@ -91,12 +91,53 @@ Let's understand these properties:
 - **quarkus.container-image.group**: your account name at Docker Hub (or at the registry that you chose).
 - **quarkus.container-image.name**: the name of your application/deployment.
 - **quarkus.container-image.tag**: version tag.
-- **quarkus.kubernetes.service-type**: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use `load-balancer`. In our case, using Openshift Developer Sandbox, we'll use `ClusterIP` and then expose it for external access (more about it in a bit).
-- **quarkus.kubernetes-client.trust-certs**: for demo purposes, we are using self-signed certs, so we need to trust them.
 
 !!! important "User your own configurations"
     Change `docker.io` to your container registry (if using another one) and `eldermoraes` to your own account. If you don’t, your push ==will fail==.
 
+We also need to set the right properties in terms of Kubernetes configuration, and here they are:
+
+```properties title="application.properties"
+--8<-- "../../section-3/step-01/src/main/resources/application.properties:kubernetes"
+```
+
+Let's understand them:
+
+- **quarkus.kubernetes-client.trust-certs**: for demo purposes, we are using self-signed certs, so we need to trust them.
+- **quarkus.kubernetes.service-type**: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use `load-balancer`. In our case, using Openshift Developer Sandbox, we'll use `ClusterIP` and then expose it for external access (more about it in a bit).
+- **quarkus.kubernetes.resources.requests.cpu**: minimum CPU cores (or millicores) required to execute each pod of this application.
+- **quarkus.kubernetes.resources.requests.memory**: minimum memory (in MiB = Mebibyte) required to execute each pod of this application.
+- **quarkus.kubernetes.resources.limits.cpu**: maximum CPU that can be allocated to each pod of this application.
+- **quarkus.kubernetes.resources.limits.memory**:  maximum memory that can be allocated to each pod of this application.
+
+---
+## Adding Health Check
+
+Health Checks are important in platforms like Kubernetes because it allows the infrastructure to be aware of the state of the application.
+There are two different types of health checks:
+
+- **Liveness probes** tell Kubernetes if your application is running ok or not. When your liveness probe is down, your platform might restart your instance to guarantee that you have the minimum required amount of running instances in production.
+- **Readiness probes** tell Kubernetes if your application is warm enough to reply to requests in a reasonable amount of time. Java applications, for example, might need some time to warm up, so the readiness probe should be up only when it’s ready to reply to a request in a timely manner. Checks that depend on other services should be implemented as readiness probes: if a remote service is down, restarting your application won’t fix the issue.
+
+We need to add the MicroProfile Health Check extension:
+
+```shell
+./mvnw quarkus:add-extension -D"extension=quarkus-smallrye-health"
+```
+
+Now let's create the Liveness probe. Create a new `LivenessProbe` Java class in `src/main/java` in the `dev.langchain4j.quarkus.workshop` package with the following contents:
+
+```java title="LivenessProbe.java"
+--8<-- "../../section-3/step-01/src/main/java/dev/langchain4j/quarkus/workshop/LivenessProbe.java"
+```
+
+Regarding the Readiness probe, we will use it to check if the application has proper connectivity with OpenAI API:
+
+```java title="ReadinessProbe.java"
+--8<-- "../../section-3/step-01/src/main/java/dev/langchain4j/quarkus/workshop/ReadinessProbe.java"
+```
+
+Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
 ---
 
 ## Authenticating to the registry and connecting to the Kubernetes cluster
@@ -189,7 +230,7 @@ quarkus-langchain4j-workshop-3-01   quarkus-langchain4j-workshop-3-01-[YOUR INST
 So, to access your application, you need to concatenate:
 
 - PORT: http (==not https==)
-- HOST/PORT: copy your DNS
+- HOST/PORT: copy it from the terminal
 
 In the example above, my application URL would be:
 
@@ -198,3 +239,6 @@ http://quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com
 ```
 
 Just copy the address created for your application, paste to your browser and use your AI-infused application as you did before.
+
+!!! important "Check the kubernetes.yml file"
+    You are encouraged to the `target/kubernetes/kubernetes.yml` file, which was automatically created by the Kubernetes extension during the deployment process. Any updates that you do to this application that require changes into this file will be done in the next build execution.
