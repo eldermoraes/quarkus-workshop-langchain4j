@@ -883,15 +883,6 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       Authenticating to the registry and connecting to the Kubernetes cluster
@@ -907,10 +898,9 @@ You are not viewing the latest version.
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Deploy the application to your Kubernetes cluster">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Provide your OpenAI API Key to your application at the Kubernetes environment
@@ -918,8 +908,8 @@ You are not viewing the latest version.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#expose-your-kubernetes-service-for-external-access" class="md-nav__link">
     <span class="md-ellipsis">
       Expose your Kubernetes service for external access
@@ -927,9 +917,13 @@ You are not viewing the latest version.
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-your-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing your application
+    </span>
+  </a>
   
 </li>
       
@@ -1080,15 +1074,6 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       Authenticating to the registry and connecting to the Kubernetes cluster
@@ -1104,10 +1089,9 @@ You are not viewing the latest version.
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Deploy the application to your Kubernetes cluster">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Provide your OpenAI API Key to your application at the Kubernetes environment
@@ -1115,8 +1099,8 @@ You are not viewing the latest version.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#expose-your-kubernetes-service-for-external-access" class="md-nav__link">
     <span class="md-ellipsis">
       Expose your Kubernetes service for external access
@@ -1124,9 +1108,13 @@ You are not viewing the latest version.
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-your-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing your application
+    </span>
+  </a>
   
 </li>
       
@@ -1211,8 +1199,8 @@ If so, you can stop your application (CTRL+C) so we can work on it. </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-Dextensions<span class="o">=</span><span class="s2">"quarkus-kubernetes,quarkus-container-image-jib"</span>
 </code></pre></div>
 <ul>
-<li>Kubernetes extension: offers the ability to automatically generate Kubernetes resources based on defaults and user-supplied configuration</li>
-<li>Container Image Jib: is powered by <a href="https://github.com/GoogleContainerTools/jib" target="_blank">Jib</a> for performing container image builds. The major benefit of using Jib with Quarkus is that all the dependencies (everything found under target/lib) are cached in a different layer than the actual application, making rebuilds really fast and small (when it comes to pushing). Another important benefit of using this extension is that it provides the ability to create a container image without having to have any dedicated client side tooling (like Docker) or running daemon processes (like the Docker daemon) when all that is needed is the ability to push to a container image registry.</li>
+<li><strong>Kubernetes extension</strong>: offers the ability to automatically generate Kubernetes resources based on defaults and user-supplied configuration</li>
+<li><strong>Container Image Jib</strong>: is powered by <a href="https://github.com/GoogleContainerTools/jib" target="_blank">Jib</a> for performing container image builds. The major benefit of using Jib with Quarkus is that all the dependencies (everything found under target/lib) are cached in a different layer than the actual application, making rebuilds really fast and small (when it comes to pushing). Another important benefit of using this extension is that it provides the ability to create a container image without having to have any dedicated client side tooling (like Docker) or running daemon processes (like the Docker daemon) when all that is needed is the ability to push to a container image registry.</li>
 </ul>
 <hr>
 <h2 id="adding-the-configuration-properties">Adding the configuration properties<a class="headerlink" href="#adding-the-configuration-properties" title="Permanent link"></a></h2>
@@ -1319,12 +1307,11 @@ There are two different types of health checks:</p>
 <a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
 <a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>
-<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>
-<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="p">}</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster">Now our application has the minimum features to be properly deployed in a Kubernetes cluster.<a class="headerlink" href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" title="Permanent link"></a></h2>
+<p>Now our application has the minimum features to be properly deployed in a Kubernetes cluster.</p>
+<hr>
 <h2 id="authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster">Authenticating to the registry and connecting to the Kubernetes cluster<a class="headerlink" href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" title="Permanent link"></a></h2>
 <p>In order to push the container image, you need to authenticate to your container registry:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>podman<span class="w"> </span>login<span class="w"> </span>docker.io
@@ -1365,14 +1352,15 @@ This command needs to be executed on your terminal. It will be something like th
 <li>Expose your Kubernetes service for external access</li>
 </ul>
 <p>Let’s do them both.</p>
-<h3 id="provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment">Provide your OpenAI API Key to your application at the Kubernetes environment<a class="headerlink" href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" title="Permanent link"></a></h3>
+<h2 id="provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment">Provide your OpenAI API Key to your application at the Kubernetes environment<a class="headerlink" href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" title="Permanent link"></a></h2>
 <p>The command below will use your local environment variable to set the environment variable on Kubernetes. </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>env<span class="w"> </span>deployment/quarkus-langchain4j-workshop-3-01<span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="si">${</span><span class="nv">OPENAI_API_KEY</span><span class="si">}</span>
 </code></pre></div>
-<h3 id="expose-your-kubernetes-service-for-external-access">Expose your Kubernetes service for external access<a class="headerlink" href="#expose-your-kubernetes-service-for-external-access" title="Permanent link"></a></h3>
+<h2 id="expose-your-kubernetes-service-for-external-access">Expose your Kubernetes service for external access<a class="headerlink" href="#expose-your-kubernetes-service-for-external-access" title="Permanent link"></a></h2>
 <p>Let’s create a route to our service, which will allow external access to our application:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>oc<span class="w"> </span>expose<span class="w"> </span>service<span class="w"> </span>quarkus-langchain4j-workshop-3-01
 </code></pre></div>
+<h2 id="accessing-your-application">Accessing your application<a class="headerlink" href="#accessing-your-application" title="Permanent link"></a></h2>
 <p>Now we need to get the DNS (route) created for our application:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>routes
 </code></pre></div>
