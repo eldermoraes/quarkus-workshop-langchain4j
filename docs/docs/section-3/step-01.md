@@ -1,4 +1,4 @@
-# Step 01 - Deploying to Kubernetes
+# Step 1 - Deploying to Kubernetes
 
 ## Welcome to Section 3: Deploying to Kubernetes
 
@@ -87,12 +87,12 @@ Add the following properties to your `src/main/resources/application.properties`
 
 Let's understand these properties:
 
-- quarkus.container-image.registry: the containers registry where we'll host our images. Here we are using Docker Hub, but it could be any other one. 
-- quarkus.container-image.group: your account name at Docker Hub (or at the registry that you chose).
-- quarkus.container-image.name: the name of your application/deployment.
-- quarkus.container-image.tag: version tag.
-- quarkus.kubernetes.service-type: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use `load-balancer`. In our case, using Openshift Developer Sandbox, we'll use `ClusterIP` and then expose it for external access (more about it in a bit).
-- quarkus.kubernetes-client.trust-certs: for demo purposes, we are using self-signed certs, so we need to trust them.
+- **quarkus.container-image.registry**: the containers registry where we'll host our images. Here we are using Docker Hub, but it could be any other one. 
+- **quarkus.container-image.group**: your account name at Docker Hub (or at the registry that you chose).
+- **quarkus.container-image.name**: the name of your application/deployment.
+- **quarkus.container-image.tag**: version tag.
+- **quarkus.kubernetes.service-type**: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use `load-balancer`. In our case, using Openshift Developer Sandbox, we'll use `ClusterIP` and then expose it for external access (more about it in a bit).
+- **quarkus.kubernetes-client.trust-certs**: for demo purposes, we are using self-signed certs, so we need to trust them.
 
 !!! important "User your own configurations"
     Change `docker.io` to your container registry (if using another one) and `eldermoraes` to your own account. If you don’t, your push ==will fail==.
@@ -149,5 +149,52 @@ If you got here, you are ready to deploy your application to Kubernetes.
 By using the Kubernetes extension that we added before, we can deploy our application by executing one single line of command:
 
 ```shell
-./mvnw quarkus:package -DskipTests -D"quarkus.kubernetes.deploy=true"
+mvn clean package -DskipTests=true -Dquarkus.kubernetes.deploy=true
 ```
+
+Once the deployment is done, you still need to perform two steps before testing it:
+
+- Provide your OpenAI API Key to your application at the Kubernetes environment
+- Expose your Kubernetes service for external access
+
+Let's do them both.
+
+### Provide your OpenAI API Key to your application at the Kubernetes environment
+
+The command below will use your local environment variable to set the environment variable on Kubernetes. 
+
+```shell
+kubectl set env deployment/quarkus-langchain4j-workshop-3-01 OPENAI_API_KEY=${OPENAI_API_KEY}
+```
+
+### Expose your Kubernetes service for external access
+
+Let's create a route to our service, which will allow external access to our application:
+
+```shell
+oc expose service quarkus-langchain4j-workshop-3-01
+```
+
+Now we need to get the DNS (route) created for our application:
+
+```shell
+kubectl get routes
+```
+
+```Bash title="Example Terminal Output"
+NAME                                HOST/PORT                                                             PATH   SERVICES                            PORT   TERMINATION   WILDCARD
+quarkus-langchain4j-workshop-3-01   quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com          quarkus-langchain4j-workshop-3-01   http                 None
+```
+
+So, to access your application, you need to concatenate:
+
+- PORT: http (==not https==)
+- HOST/PORT: copy your DNS
+
+In the example above, my application URL would be:
+
+```
+http://quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com
+```
+
+Just copy the address created for your application, paste to your browser and use your AI-infused application as you did before.
