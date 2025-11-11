@@ -72,8 +72,8 @@ Here we’ll be using the Quarkus Kubernetes extension to create the Kubernetes 
 ./mvnw quarkus:add-extension -Dextensions="quarkus-kubernetes,quarkus-container-image-jib"
 ```
 
-- Kubernetes extension: offers the ability to automatically generate Kubernetes resources based on defaults and user-supplied configuration
-- Container Image Jib: is powered by [Jib](https://github.com/GoogleContainerTools/jib){target="_blank"} for performing container image builds. The major benefit of using Jib with Quarkus is that all the dependencies (everything found under target/lib) are cached in a different layer than the actual application, making rebuilds really fast and small (when it comes to pushing). Another important benefit of using this extension is that it provides the ability to create a container image without having to have any dedicated client side tooling (like Docker) or running daemon processes (like the Docker daemon) when all that is needed is the ability to push to a container image registry.
+- **Kubernetes extension**: offers the ability to automatically generate Kubernetes resources based on defaults and user-supplied configuration
+- **Container Image Jib**: is powered by [Jib](https://github.com/GoogleContainerTools/jib){target="_blank"} for performing container image builds. The major benefit of using Jib with Quarkus is that all the dependencies (everything found under target/lib) are cached in a different layer than the actual application, making rebuilds really fast and small (when it comes to pushing). Another important benefit of using this extension is that it provides the ability to create a container image without having to have any dedicated client side tooling (like Docker) or running daemon processes (like the Docker daemon) when all that is needed is the ability to push to a container image registry.
 
 ---
 
@@ -138,6 +138,7 @@ Regarding the Readiness probe, we will use it to check if the application has pr
 ```
 
 Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
+
 ---
 
 ## Authenticating to the registry and connecting to the Kubernetes cluster
@@ -200,7 +201,7 @@ Once the deployment is done, you still need to perform two steps before testing 
 
 Let's do them both.
 
-### Provide your OpenAI API Key to your application at the Kubernetes environment
+## Provide your OpenAI API Key to your application at the Kubernetes environment
 
 The command below will use your local environment variable to set the environment variable on Kubernetes. 
 
@@ -208,13 +209,15 @@ The command below will use your local environment variable to set the environmen
 kubectl set env deployment/quarkus-langchain4j-workshop-3-01 OPENAI_API_KEY=${OPENAI_API_KEY}
 ```
 
-### Expose your Kubernetes service for external access
+## Expose your Kubernetes service for external access
 
 Let's create a route to our service, which will allow external access to our application:
 
 ```shell
 oc expose service quarkus-langchain4j-workshop-3-01
 ```
+
+## Accessing your application
 
 Now we need to get the DNS (route) created for our application:
 

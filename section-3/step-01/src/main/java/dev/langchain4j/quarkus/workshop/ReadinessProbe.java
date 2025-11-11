@@ -39,7 +39,5 @@ public class ReadinessProbe implements HealthCheck {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
