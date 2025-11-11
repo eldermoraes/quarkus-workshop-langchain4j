@@ -874,6 +874,24 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Health Check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       Authenticating to the registry and connecting to the Kubernetes cluster
@@ -1053,6 +1071,24 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Health Check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Now our application has the minimum features to be properly deployed in a Kubernetes cluster.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       Authenticating to the registry and connecting to the Kubernetes cluster
@@ -1152,16 +1188,16 @@ You are not viewing the latest version.
 </ul>
 <hr>
 <h2 id="running-the-application">Running the Application<a class="headerlink" href="#running-the-application" title="Permanent link"></a></h2>
-<p>Navigate to the <code>section-3/step-01</code> directory and start the application:</p>
+<p>Navigate to the <code>section-1/step-05</code> directory and start the application:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux / macOS</label><label for="__tabbed_1_2">Windows</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>section-3/step-01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>section-1/step-05
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./mvnw<span class="w"> </span>quarkus:dev
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cd section-3\step-01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cd section-1\step-05
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mvnw quarkus:dev
 </code></pre></div>
 </div>
@@ -1185,8 +1221,6 @@ If so, you can stop your application (CTRL+C) so we can work on it. </p>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">quarkus.container-image.group</span><span class="o">=</span><span class="s">eldermoraes</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">quarkus.container-image.name</span><span class="o">=</span><span class="s">quarkus-langchain4j-workshop</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">quarkus.container-image.tag</span><span class="o">=</span><span class="s">1.0-SNAPSHOT</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="na">quarkus.kubernetes.service-type</span><span class="o">=</span><span class="s">ClusterIP</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="na">quarkus.kubernetes-client.trust-certs</span><span class="o">=</span><span class="s">true</span>
 </code></pre></div>
 <p>Let’s understand these properties:</p>
 <ul>
@@ -1194,17 +1228,106 @@ If so, you can stop your application (CTRL+C) so we can work on it. </p>
 <li><strong>quarkus.container-image.group</strong>: your account name at Docker Hub (or at the registry that you chose).</li>
 <li><strong>quarkus.container-image.name</strong>: the name of your application/deployment.</li>
 <li><strong>quarkus.container-image.tag</strong>: version tag.</li>
-<li><strong>quarkus.kubernetes.service-type</strong>: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use <code>load-balancer</code>. In our case, using Openshift Developer Sandbox, we’ll use <code>ClusterIP</code> and then expose it for external access (more about it in a bit).</li>
-<li><strong>quarkus.kubernetes-client.trust-certs</strong>: for demo purposes, we are using self-signed certs, so we need to trust them.</li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">User your own configurations</p>
 <p>Change <code>docker.io</code> to your container registry (if using another one) and <code>eldermoraes</code> to your own account. If you don’t, your push <mark>will fail</mark>.</p>
 </div>
+<p>We also need to set the right properties in terms of Kubernetes configuration, and here they are:</p>
+<div class="highlight"><span class="filename">application.properties</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">quarkus.kubernetes-client.trust-certs</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">quarkus.kubernetes.service-type</span><span class="o">=</span><span class="s">ClusterIP</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">quarkus.kubernetes.resources.requests.cpu</span><span class="o">=</span><span class="s">250m</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="na">quarkus.kubernetes.resources.requests.memory</span><span class="o">=</span><span class="s">256Mi</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="na">quarkus.kubernetes.resources.limits.cpu</span><span class="o">=</span><span class="s">500m</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="na">quarkus.kubernetes.resources.limits.memory</span><span class="o">=</span><span class="s">512Mi</span>
+</code></pre></div>
+<p>Let’s understand them:</p>
+<ul>
+<li><strong>quarkus.kubernetes-client.trust-certs</strong>: for demo purposes, we are using self-signed certs, so we need to trust them.</li>
+<li><strong>quarkus.kubernetes.service-type</strong>: the service type at Kubernetes cluster. If you have access to a full Kubernetes cluster, you can use <code>load-balancer</code>. In our case, using Openshift Developer Sandbox, we’ll use <code>ClusterIP</code> and then expose it for external access (more about it in a bit).</li>
+<li><strong>quarkus.kubernetes.resources.requests.cpu</strong>: minimum CPU cores (or millicores) required to execute each pod of this application.</li>
+<li><strong>quarkus.kubernetes.resources.requests.memory</strong>: minimum memory (in MiB = Mebibyte) required to execute each pod of this application.</li>
+<li><strong>quarkus.kubernetes.resources.limits.cpu</strong>: maximum CPU that can be allocated to each pod of this application.</li>
+<li><strong>quarkus.kubernetes.resources.limits.memory</strong>:  maximum memory that can be allocated to each pod of this application.</li>
+</ul>
 <hr>
+<h2 id="adding-health-check">Adding Health Check<a class="headerlink" href="#adding-health-check" title="Permanent link"></a></h2>
+<p>Health Checks are important in platforms like Kubernetes because it allows the infrastructure to be aware of the state of the application.
+There are two different types of health checks:</p>
+<ul>
+<li><strong>Liveness probes</strong> tell Kubernetes if your application is running ok or not. When your liveness probe is down, your platform might restart your instance to guarantee that you have the minimum required amount of running instances in production.</li>
+<li><strong>Readiness probes</strong> tell Kubernetes if your application is warm enough to reply to requests in a reasonable amount of time. Java applications, for example, might need some time to warm up, so the readiness probe should be up only when it’s ready to reply to a request in a timely manner. Checks that depend on other services should be implemented as readiness probes: if a remote service is down, restarting your application won’t fix the issue.</li>
+</ul>
+<p>We need to add the MicroProfile Health Check extension:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-D<span class="s2">"extension=quarkus-smallrye-health"</span>
+</code></pre></div>
+<p>Now let’s create the Liveness probe. Create a new <code>LivenessProbe</code> Java class in <code>src/main/java</code> in the <code>dev.langchain4j.quarkus.workshop</code> package with the following contents:</p>
+<div class="highlight"><span class="filename">LivenessProbe.java</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.HealthCheck</span><span class="p">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.HealthCheckResponse</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.Liveness</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nd">@Liveness</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LivenessProbe</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HealthCheck</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HealthCheckResponse</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HealthCheckResponse</span><span class="p">.</span><span class="na">up</span><span class="p">(</span><span class="s">"I'm alive"</span><span class="p">);</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">}</span>
+</code></pre></div>
+<p>Regarding the Readiness probe, we will use it to check if the application has proper connectivity with OpenAI API:</p>
+<div class="highlight"><span class="filename">ReadinessProbe.java</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.config.inject.ConfigProperty</span><span class="p">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.HealthCheck</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.HealthCheckResponse</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.microprofile.health.Readiness</span><span class="p">;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpClient</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpRequest</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpResponse</span><span class="p">;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="nd">@Readiness</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadinessProbe</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HealthCheck</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nd">@ConfigProperty</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"quarkus.langchain4j.openai.api-key"</span><span class="p">)</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">OpenAI_API_KEY</span><span class="p">;</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">OPENAI_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"https://api.openai.com/v1/models"</span><span class="p">;</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HealthCheckResponse</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">        </span><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">response</span><span class="p">;</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">newHttpClient</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">            </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">                    </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">OPENAI_URL</span><span class="p">))</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">                    </span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span><span class="w"> </span><span class="s">"Bearer "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">OpenAI_API_KEY</span><span class="p">)</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">                    </span><span class="p">.</span><span class="na">GET</span><span class="p">()</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">                    </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">            </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpResponse</span><span class="p">.</span><span class="na">BodyHandlers</span><span class="p">.</span><span class="na">ofString</span><span class="p">());</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="na">statusCode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">HealthCheckResponse</span><span class="p">.</span><span class="na">up</span><span class="p">(</span><span class="s">"OpenAI connectivity ok"</span><span class="p">);</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">HealthCheckResponse</span><span class="p">.</span><span class="na">down</span><span class="p">(</span><span class="s">"OpenAI connectivity failed"</span><span class="p">);</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster">Now our application has the minimum features to be properly deployed in a Kubernetes cluster.<a class="headerlink" href="#now-our-application-has-the-minimum-features-to-be-properly-deployed-in-a-kubernetes-cluster" title="Permanent link"></a></h2>
 <h2 id="authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster">Authenticating to the registry and connecting to the Kubernetes cluster<a class="headerlink" href="#authenticating-to-the-registry-and-connecting-to-the-kubernetes-cluster" title="Permanent link"></a></h2>
 <p>In order to push the container image, you need to authenticate to your container registry:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>podman<span class="w"> </span>login<span class="w"> </span>docker.io
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>podman<span class="w"> </span>login<span class="w"> </span>docker.io
 </code></pre></div>
 <p>We need also to connect our terminal to our remote Kubernetes instance on Openshift Developer Sandbox. 
 Open your instance dashboard and click on your username, which is in the top right corner of the screen:</p>
@@ -1219,22 +1342,22 @@ Open your instance dashboard and click on your username, which is in the top rig
 <p><img alt="OpenShift Developer Sandbox Token" src="../../images/openshift-sandbox-token.png"></p>
 <p>Copy the command under the “Log in with this token” label. 
 This command needs to be executed on your terminal. It will be something like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>oc<span class="w"> </span>login<span class="w"> </span>--token<span class="o">=</span>sha256~<span class="o">[</span>YOUR<span class="w"> </span>TOKEN<span class="o">]</span><span class="w"> </span>--server<span class="o">=</span>https://api.<span class="o">[</span>YOUR<span class="w"> </span>INSTANCE<span class="o">]</span>.openshiftapps.com:6443
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>oc<span class="w"> </span>login<span class="w"> </span>--token<span class="o">=</span>sha256~<span class="o">[</span>YOUR<span class="w"> </span>TOKEN<span class="o">]</span><span class="w"> </span>--server<span class="o">=</span>https://api.<span class="o">[</span>YOUR<span class="w"> </span>INSTANCE<span class="o">]</span>.openshiftapps.com:6443
 </code></pre></div>
 <p>After execution, expect to see this:</p>
-<div class="highlight"><span class="filename">Example Terminal Output</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Logged<span class="w"> </span>into<span class="w"> </span><span class="s2">"https://api.[YOUR INSTANCE].openshiftapps.com:6443"</span><span class="w"> </span>as<span class="w"> </span><span class="s2">"elder-moraes"</span><span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>token<span class="w"> </span>provided.
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>You<span class="w"> </span>have<span class="w"> </span>access<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>projects<span class="w"> </span>and<span class="w"> </span>can<span class="w"> </span>switch<span class="w"> </span>between<span class="w"> </span>them<span class="w"> </span>with<span class="w"> </span><span class="s1">'oc project &lt;projectname&gt;'</span>:
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span>*<span class="w"> </span>elder-moraes-dev
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span>openshift-virtualization-os-images
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>Using<span class="w"> </span>project<span class="w"> </span><span class="s2">"elder-moraes-dev"</span>.
+<div class="highlight"><span class="filename">Example Terminal Output</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Logged<span class="w"> </span>into<span class="w"> </span><span class="s2">"https://api.[YOUR INSTANCE].openshiftapps.com:6443"</span><span class="w"> </span>as<span class="w"> </span><span class="s2">"elder-moraes"</span><span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>token<span class="w"> </span>provided.
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>You<span class="w"> </span>have<span class="w"> </span>access<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>projects<span class="w"> </span>and<span class="w"> </span>can<span class="w"> </span>switch<span class="w"> </span>between<span class="w"> </span>them<span class="w"> </span>with<span class="w"> </span><span class="s1">'oc project &lt;projectname&gt;'</span>:
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span>*<span class="w"> </span>elder-moraes-dev
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>openshift-virtualization-os-images
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>Using<span class="w"> </span>project<span class="w"> </span><span class="s2">"elder-moraes-dev"</span>.
 </code></pre></div>
 <p>If you got here, you are ready to deploy your application to Kubernetes.</p>
 <h2 id="deploy-the-application-to-your-kubernetes-cluster">Deploy the application to your Kubernetes cluster<a class="headerlink" href="#deploy-the-application-to-your-kubernetes-cluster" title="Permanent link"></a></h2>
 <p>By using the Kubernetes extension that we added before, we can deploy our application by executing one single line of command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dquarkus.kubernetes.deploy<span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dquarkus.kubernetes.deploy<span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <p>Once the deployment is done, you still need to perform two steps before testing it:</p>
 <ul>
@@ -1244,27 +1367,31 @@ This command needs to be executed on your terminal. It will be something like th
 <p>Let’s do them both.</p>
 <h3 id="provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment">Provide your OpenAI API Key to your application at the Kubernetes environment<a class="headerlink" href="#provide-your-openai-api-key-to-your-application-at-the-kubernetes-environment" title="Permanent link"></a></h3>
 <p>The command below will use your local environment variable to set the environment variable on Kubernetes. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>env<span class="w"> </span>deployment/quarkus-langchain4j-workshop-3-01<span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="si">${</span><span class="nv">OPENAI_API_KEY</span><span class="si">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>env<span class="w"> </span>deployment/quarkus-langchain4j-workshop-3-01<span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="si">${</span><span class="nv">OPENAI_API_KEY</span><span class="si">}</span>
 </code></pre></div>
 <h3 id="expose-your-kubernetes-service-for-external-access">Expose your Kubernetes service for external access<a class="headerlink" href="#expose-your-kubernetes-service-for-external-access" title="Permanent link"></a></h3>
 <p>Let’s create a route to our service, which will allow external access to our application:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>oc<span class="w"> </span>expose<span class="w"> </span>service<span class="w"> </span>quarkus-langchain4j-workshop-3-01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>oc<span class="w"> </span>expose<span class="w"> </span>service<span class="w"> </span>quarkus-langchain4j-workshop-3-01
 </code></pre></div>
 <p>Now we need to get the DNS (route) created for our application:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>routes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>routes
 </code></pre></div>
-<div class="highlight"><span class="filename">Example Terminal Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>NAME<span class="w">                                </span>HOST/PORT<span class="w">                                                             </span>PATH<span class="w">   </span>SERVICES<span class="w">                            </span>PORT<span class="w">   </span>TERMINATION<span class="w">   </span>WILDCARD
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>quarkus-langchain4j-workshop-3-01<span class="w">   </span>quarkus-langchain4j-workshop-3-01-<span class="o">[</span>YOUR<span class="w"> </span>INSTANCE<span class="o">]</span>.openshiftapps.com<span class="w">          </span>quarkus-langchain4j-workshop-3-01<span class="w">   </span>http<span class="w">                 </span>None
+<div class="highlight"><span class="filename">Example Terminal Output</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>NAME<span class="w">                                </span>HOST/PORT<span class="w">                                                             </span>PATH<span class="w">   </span>SERVICES<span class="w">                            </span>PORT<span class="w">   </span>TERMINATION<span class="w">   </span>WILDCARD
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>quarkus-langchain4j-workshop-3-01<span class="w">   </span>quarkus-langchain4j-workshop-3-01-<span class="o">[</span>YOUR<span class="w"> </span>INSTANCE<span class="o">]</span>.openshiftapps.com<span class="w">          </span>quarkus-langchain4j-workshop-3-01<span class="w">   </span>http<span class="w">                 </span>None
 </code></pre></div>
 <p>So, to access your application, you need to concatenate:</p>
 <ul>
 <li>PORT: http (<mark>not https</mark>)</li>
-<li>HOST/PORT: copy your DNS</li>
+<li>HOST/PORT: copy it from the terminal</li>
 </ul>
 <p>In the example above, my application URL would be:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>http://quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>http://quarkus-langchain4j-workshop-3-01-[YOUR INSTANCE].openshiftapps.com
 </code></pre></div>
-<p>Just copy the address created for your application, paste to your browser and use your AI-infused application as you did before.</p></div>
+<p>Just copy the address created for your application, paste to your browser and use your AI-infused application as you did before.</p>
+<div class="admonition important">
+<p class="admonition-title">Check the kubernetes.yml file</p>
+<p>You are encouraged to the <code>target/kubernetes/kubernetes.yml</code> file, which was automatically created by the Kubernetes extension during the deployment process. Any updates that you do to this application that require changes into this file will be done in the next build execution.</p>
+</div></div>
 
 
 
