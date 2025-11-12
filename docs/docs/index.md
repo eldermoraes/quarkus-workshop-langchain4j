@@ -13,6 +13,7 @@ You will learn how to:
 - Use remote tools via the Model Context Protocol (MCP)
 - Connect with remote agents using Agent-to-Agent (A2A) communication
 - Design agentic systems using workflow and supervisor patterns
+- Deploy your AI-infused application to a Kubernetes instance
 
 ---
 
@@ -28,11 +29,15 @@ The workshop is divided into two sections:
 - **Section 2 – Agentic systems (4 steps):**  
   You’ll extend the chatbot into an agentic workflow, introducing planning, supervision, and collaboration patterns.
 
+- **Section 3 – Deploying to Kubernetes (1 step):**  
+  You’ll learn what you need to do to deploy your AI-infused application into a Kubernetes cluster and what are the best practices to do it using Quarkus.
+
 Each step builds on the previous one, with the results stored in separate directories (`step-XX`):
 
 - Final solution for Section 1: `section-1/step-11`
 - Final solution for Section 2: `section-2/step-04`
-
+- Final solution for Section 2: `section-3/step-01`
+- 
 ---
 
 ## How to Work with Steps
