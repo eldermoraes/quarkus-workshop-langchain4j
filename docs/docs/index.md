@@ -36,8 +36,8 @@ Each step builds on the previous one, with the results stored in separate direct
 
 - Final solution for Section 1: `section-1/step-11`
 - Final solution for Section 2: `section-2/step-04`
-- Final solution for Section 2: `section-3/step-01`
-- 
+- Final solution for Section 3: `section-3/step-01`
+
 ---
 
 ## How to Work with Steps
