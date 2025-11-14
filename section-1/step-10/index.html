@@ -1337,7 +1337,7 @@ should something go wrong, we are able to handle it gracefully.</p>
 <p>Ultimately, calling an LLM is not much different than making traditional REST calls.
 If you’re familiar with <a href="https://microprofile.io" target="_blank">MicroProfile</a>, you may know that it has a specification for how to implement Fault Tolerance. Quarkus implements this feature with the <code>quarkus-smallrye-fault-tolerance</code>
 extension. Go ahead and add it to your project:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-D<span class="s2">"quarkus-smallrye-fault-tolerance"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./mvnw<span class="w"> </span>quarkus:add-extension<span class="w"> </span>-D<span class="s2">"extensions=quarkus-smallrye-fault-tolerance"</span>
 </code></pre></div>
 <p>The MicroProfile Fault Tolerance spec defines 3 main fault tolerance capabilities:</p>
 <ul>
