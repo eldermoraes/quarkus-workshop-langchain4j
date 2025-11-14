@@ -176,16 +176,25 @@ through the use of metrics and cold hard numbers. Using these metrics,
 we can create meaningful graphs, dashboards and alerts.
 
 The (currently) preferred way to gather metrics in Quarkus is to use the micrometer project.
-You can add metrics collection with micrometer by adding the `quarkus-micrometer` extension to the project.
+You can add metrics collection with micrometer by adding the `quarkus-micrometer` and `quarkus-opentelemetry` extensions to the project.
 
 ```shell
-./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer"
+./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer,quarkus-opentelemetry"
 ```
 
 You should also add the `quarkus-micrometer-registry-prometheus` extension which formats the metrics in format that Prometheus can easily ingest: 
 
 ```shell
 ./mvnw quarkus:add-extension -D"extensions=quarkus-micrometer-registry-prometheus"
+```
+
+We also need to add the [OTLP](https://opentelemetry.io/docs/specs/otlp/){target="_blank"} registry in order to everything works properly:
+
+```xml title="pom.xml"
+    <dependency>
+        <groupId>io.quarkiverse.micrometer.registry</groupId>
+        <artifactId>quarkus-micrometer-registry-otlp</artifactId>
+    </dependency>
 ```
 
 By just adding these extensions, your application is now exposing metrics at the 
@@ -229,15 +238,9 @@ Quarkus relies on OpenTelemetry for tracing capabilities, allowing you to collec
  trace data from your LangChain4j application. You can use the OpenTelemetry API to send traces to a tracing service
 such as Jaeger, Zipkin, or Tempo, which can then be used for monitoring and debugging purposes.
 
-To add OpenTelemetry (and by extension tracing) to your application, you will need to add the opentelemetry
-extensions to your pom.xml file. You can optionally also add the opentelemetry-jdbc dependency to collect
- trace data from JDBC queries.
+You can optionally also add the `opentelemetry-jdbc dependency to collect  trace data from JDBC queries.
 
 ```xml title="pom.xml"
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-opentelemetry</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.opentelemetry.instrumentation</groupId>
             <artifactId>opentelemetry-jdbc</artifactId>
