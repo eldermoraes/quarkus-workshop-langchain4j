@@ -359,7 +359,7 @@ If you're familiar with [MicroProfile](https://microprofile.io){target="_blank"}
 extension. Go ahead and add it to your project:
 
 ```shell
-./mvnw quarkus:add-extension -D"quarkus-smallrye-fault-tolerance"
+./mvnw quarkus:add-extension -D"extensions=quarkus-smallrye-fault-tolerance"
 ```
 
 The MicroProfile Fault Tolerance spec defines 3 main fault tolerance capabilities:
