@@ -492,10 +492,10 @@ In `src/main/java/com/demo`, create `DispositionTool.java`:
 
 **Key Points:**
 
-- **@Dependent scope**: Required for tool detection
-- **Three methods**: `scrapCar()`, `sellCar()`, `donateCar()`
+- **@Singleton scope**: Required for tool detection
+- **Three disposition options (via enum)**: `SCRAP`, `SELL`, `DONATE`
 - **@Tool annotation**: Makes each method available to the AI agent
-- **Detailed descriptions**: Help the AI agent choose the appropriate action
+- **Detailed descriptions (inside @Tool annotation)**: Help the AI agent choose the appropriate action
 
 ### Step 9: Create the DispositionAgent (AI Service)
 
@@ -512,7 +512,6 @@ In `src/main/java/com/demo`, create `DispositionAgent.java`:
 - **`@RegisterAiService`**: Registers this as an AI service (not an agentic agent)
 - **`@ToolBox(DispositionTool.class)`**: Has access to the DispositionTool
 - **System message**: Defines the agent as a car disposition specialist
-- **Decision criteria**: Considers condition, age, safety, and recommendation from the feedback agent
 
 !!!note "AI Service vs. Agentic Agent"
     Notice this is a **traditional AI service** (from Section 1), not an agentic workflow. 
@@ -607,54 +606,37 @@ Produces an `AgentExecutor` bean that Quarkus LangChain4j will use to handle A2A
 #### Task Processing
 
 ```java
-public void execute(RequestContext context, EventQueue eventQueue) {
-    TaskUpdater updater = new TaskUpdater(context, eventQueue);
-
-    // Extract input parts from the task
-    Map<String, MessagePart> inputParts = context.task().input();
+public void execute(RequestContext context, EventQueue eventQueue) 
 ```
 
 The `RequestContext` contains the incoming task with all input parameters sent by the client.
 
-#### Extract Parameters
+#### Extract Parameters & Call the AI Agent
 
 ```java
-String carMake = getTextPart(inputParts, "carMake");
-String carModel = getTextPart(inputParts, "carModel");
-Integer carYear = getIntegerPart(inputParts, "carYear");
-// ... etc
+// Call the agent with all parameters as strings
+String agentResponse = dispositionAgent.processDisposition(
+        inputs.get(0),                      // carMake
+        inputs.get(1),                      // carModel
+        Integer.parseInt(inputs.get(2)),    // carYear
+        Long.parseLong(inputs.get(3)),      // carNumber
+        inputs.get(4),                      // carCondition
+        inputs.get(5));                     // dispositionRequest
 ```
 
 Extracts each parameter by name from the task input. These names must match the client agent's method parameters.
-
-#### Call the AI Agent
-
-```java
-String result = dispositionAgent.processDisposition(
-    carMake, carModel, carYear, carNumber, carCondition, dispositionRequest
-);
-```
-
-Invokes the AI agent to process the disposition request.
+Then invokes the AI agent to process the disposition request.
 
 #### Update Task Status
 
 ```java
-updater.finishTask(List.of(MessagePart.text(result)));
+TextPart responsePart = new TextPart(agentResponse, null);
+List<Part<?>> parts = List.of(responsePart);
+updater.addArtifact(parts, null, null, null);
+updater.complete();
 ```
 
 Sends the result back to the client via the `TaskUpdater`. This completes the A2A task.
-
-#### Helper Methods
-
-```java
-private String getTextPart(Map<String, MessagePart> parts, String key) {
-    MessagePart part = parts.get(key);
-    return part != null ? part.content() : "";
-}
-```
-
-Safely extracts text values from MessagePart objects.
 
 ---
 

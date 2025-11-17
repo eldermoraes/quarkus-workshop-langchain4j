@@ -194,6 +194,7 @@ We also need to add the [OTLP](https://opentelemetry.io/docs/specs/otlp/){target
     <dependency>
         <groupId>io.quarkiverse.micrometer.registry</groupId>
         <artifactId>quarkus-micrometer-registry-otlp</artifactId>
+        <version>3.4.1</version>
     </dependency>
 ```
 

@@ -41,7 +41,7 @@ public class DispositionTool {
      * @param carCondition The condition of the car
      * @return A summary of the disposition request
      */
-    @Tool(name = "DispositionTool")
+    @Tool("Requests car disposition operations")
     public String requestDisposition(
             Long carNumber,
             String carMake,
