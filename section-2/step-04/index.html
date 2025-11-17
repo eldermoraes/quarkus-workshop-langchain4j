@@ -1059,18 +1059,9 @@ You are not viewing the latest version.
 </li>
         
           <li class="md-nav__item">
-  <a href="#extract-parameters" class="md-nav__link">
+  <a href="#extract-parameters-call-the-ai-agent" class="md-nav__link">
     <span class="md-ellipsis">
-      Extract Parameters
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#call-the-ai-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      Call the AI Agent
+      Extract Parameters &amp; Call the AI Agent
     </span>
   </a>
   
@@ -1080,15 +1071,6 @@ You are not viewing the latest version.
   <a href="#update-task-status" class="md-nav__link">
     <span class="md-ellipsis">
       Update Task Status
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#helper-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      Helper Methods
     </span>
   </a>
   
@@ -1793,18 +1775,9 @@ You are not viewing the latest version.
 </li>
         
           <li class="md-nav__item">
-  <a href="#extract-parameters" class="md-nav__link">
+  <a href="#extract-parameters-call-the-ai-agent" class="md-nav__link">
     <span class="md-ellipsis">
-      Extract Parameters
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#call-the-ai-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      Call the AI Agent
+      Extract Parameters &amp; Call the AI Agent
     </span>
   </a>
   
@@ -1814,15 +1787,6 @@ You are not viewing the latest version.
   <a href="#update-task-status" class="md-nav__link">
     <span class="md-ellipsis">
       Update Task Status
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#helper-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      Helper Methods
     </span>
   </a>
   
@@ -2730,7 +2694,7 @@ The remote agent can access them by name.</p>
 <a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="cm">     * @param carCondition The condition of the car</span>
 <a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a><span class="cm">     * @return A summary of the disposition request</span>
 <a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a><span class="cm">     */</span>
-<a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a><span class="w">    </span><span class="nd">@Tool</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"DispositionTool"</span><span class="p">)</span>
+<a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a><span class="w">    </span><span class="nd">@Tool</span><span class="p">(</span><span class="s">"Requests car disposition operations"</span><span class="p">)</span>
 <a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">requestDisposition</span><span class="p">(</span>
 <a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a><span class="w">            </span><span class="n">Long</span><span class="w"> </span><span class="n">carNumber</span><span class="p">,</span>
 <a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">carMake</span><span class="p">,</span>
@@ -2754,10 +2718,10 @@ The remote agent can access them by name.</p>
 </code></pre></div>
 <p><strong>Key Points:</strong></p>
 <ul>
-<li><strong>@Dependent scope</strong>: Required for tool detection</li>
-<li><strong>Three methods</strong>: <code>scrapCar()</code>, <code>sellCar()</code>, <code>donateCar()</code></li>
+<li><strong>@Singleton scope</strong>: Required for tool detection</li>
+<li><strong>Three disposition options (via enum)</strong>: <code>SCRAP</code>, <code>SELL</code>, <code>DONATE</code></li>
 <li><strong>@Tool annotation</strong>: Makes each method available to the AI agent</li>
-<li><strong>Detailed descriptions</strong>: Help the AI agent choose the appropriate action</li>
+<li><strong>Detailed descriptions (inside @Tool annotation)</strong>: Help the AI agent choose the appropriate action</li>
 </ul>
 <h3 id="step-9-create-the-dispositionagent-ai-service">Step 9: Create the DispositionAgent (AI Service)<a class="headerlink" href="#step-9-create-the-dispositionagent-ai-service" title="Permanent link"></a></h3>
 <p>The AI agent that actually makes disposition decisions.</p>
@@ -2811,7 +2775,6 @@ The remote agent can access them by name.</p>
 <li><strong><code>@RegisterAiService</code></strong>: Registers this as an AI service (not an agentic agent)</li>
 <li><strong><code>@ToolBox(DispositionTool.class)</code></strong>: Has access to the DispositionTool</li>
 <li><strong>System message</strong>: Defines the agent as a car disposition specialist</li>
-<li><strong>Decision criteria</strong>: Considers condition, age, safety, and recommendation from the feedback agent</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">AI Service vs. Agentic Agent</p>
@@ -2998,62 +2961,53 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 </code></pre></div>
 <p>Produces an <code>AgentExecutor</code> bean that Quarkus LangChain4j will use to handle A2A task requests.</p>
 <h4 id="task-processing">Task Processing<a class="headerlink" href="#task-processing" title="Permanent link"></a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">RequestContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">EventQueue</span><span class="w"> </span><span class="n">eventQueue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="n">TaskUpdater</span><span class="w"> </span><span class="n">updater</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TaskUpdater</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">eventQueue</span><span class="p">);</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="c1">// Extract input parts from the task</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">MessagePart</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputParts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">task</span><span class="p">().</span><span class="na">input</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">RequestContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">EventQueue</span><span class="w"> </span><span class="n">eventQueue</span><span class="p">)</span><span class="w"> </span>
 </code></pre></div>
 <p>The <code>RequestContext</code> contains the incoming task with all input parameters sent by the client.</p>
-<h4 id="extract-parameters">Extract Parameters<a class="headerlink" href="#extract-parameters" title="Permanent link"></a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">String</span><span class="w"> </span><span class="n">carMake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTextPart</span><span class="p">(</span><span class="n">inputParts</span><span class="p">,</span><span class="w"> </span><span class="s">"carMake"</span><span class="p">);</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">String</span><span class="w"> </span><span class="n">carModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getTextPart</span><span class="p">(</span><span class="n">inputParts</span><span class="p">,</span><span class="w"> </span><span class="s">"carModel"</span><span class="p">);</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">Integer</span><span class="w"> </span><span class="n">carYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getIntegerPart</span><span class="p">(</span><span class="n">inputParts</span><span class="p">,</span><span class="w"> </span><span class="s">"carYear"</span><span class="p">);</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="c1">// ... etc</span>
+<h4 id="extract-parameters-call-the-ai-agent">Extract Parameters &amp; Call the AI Agent<a class="headerlink" href="#extract-parameters-call-the-ai-agent" title="Permanent link"></a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1">// Call the agent with all parameters as strings</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">String</span><span class="w"> </span><span class="n">agentResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dispositionAgent</span><span class="p">.</span><span class="na">processDisposition</span><span class="p">(</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w">                      </span><span class="c1">// carMake</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w">                      </span><span class="c1">// carModel</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">        </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span><span class="w">    </span><span class="c1">// carYear</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">        </span><span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span><span class="w">      </span><span class="c1">// carNumber</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w">                      </span><span class="c1">// carCondition</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w">                     </span><span class="c1">// dispositionRequest</span>
 </code></pre></div>
-<p>Extracts each parameter by name from the task input. These names must match the client agent’s method parameters.</p>
-<h4 id="call-the-ai-agent">Call the AI Agent<a class="headerlink" href="#call-the-ai-agent" title="Permanent link"></a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dispositionAgent</span><span class="p">.</span><span class="na">processDisposition</span><span class="p">(</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="n">carMake</span><span class="p">,</span><span class="w"> </span><span class="n">carModel</span><span class="p">,</span><span class="w"> </span><span class="n">carYear</span><span class="p">,</span><span class="w"> </span><span class="n">carNumber</span><span class="p">,</span><span class="w"> </span><span class="n">carCondition</span><span class="p">,</span><span class="w"> </span><span class="n">dispositionRequest</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="p">);</span>
-</code></pre></div>
-<p>Invokes the AI agent to process the disposition request.</p>
+<p>Extracts each parameter by name from the task input. These names must match the client agent’s method parameters.
+Then invokes the AI agent to process the disposition request.</p>
 <h4 id="update-task-status">Update Task Status<a class="headerlink" href="#update-task-status" title="Permanent link"></a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">updater</span><span class="p">.</span><span class="na">finishTask</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">MessagePart</span><span class="p">.</span><span class="na">text</span><span class="p">(</span><span class="n">result</span><span class="p">)));</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">TextPart</span><span class="w"> </span><span class="n">responsePart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextPart</span><span class="p">(</span><span class="n">agentResponse</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">Part</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">responsePart</span><span class="p">);</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="n">updater</span><span class="p">.</span><span class="na">addArtifact</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="n">updater</span><span class="p">.</span><span class="na">complete</span><span class="p">();</span>
 </code></pre></div>
 <p>Sends the result back to the client via the <code>TaskUpdater</code>. This completes the A2A task.</p>
-<h4 id="helper-methods">Helper Methods<a class="headerlink" href="#helper-methods" title="Permanent link"></a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getTextPart</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">MessagePart</span><span class="o">&gt;</span><span class="w"> </span><span class="n">parts</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="n">MessagePart</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">part</span><span class="p">.</span><span class="na">content</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="p">;</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>Safely extracts text values from MessagePart objects.</p>
 <hr>
 <h2 id="try-it-out">Try It Out<a class="headerlink" href="#try-it-out" title="Permanent link"></a></h2>
 <p>You’ll need to run <strong>two applications simultaneously</strong>.</p>
 <h3 id="terminal-1-start-the-remote-a2a-server">Terminal 1: Start the Remote A2A Server<a class="headerlink" href="#terminal-1-start-the-remote-a2a-server" title="Permanent link"></a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nb">cd</span><span class="w"> </span>section-2/step-04/remote-a2a-agent
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>./mvnw<span class="w"> </span>quarkus:dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nb">cd</span><span class="w"> </span>section-2/step-04/remote-a2a-agent
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>./mvnw<span class="w"> </span>quarkus:dev
 </code></pre></div>
 <p>Wait for:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Listening on: http://localhost:8888
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Listening on: http://localhost:8888
 </code></pre></div>
 <p>The disposition service is now running and ready to accept A2A requests!</p>
 <h3 id="terminal-2-start-the-main-application">Terminal 2: Start the Main Application<a class="headerlink" href="#terminal-2-start-the-main-application" title="Permanent link"></a></h3>
 <p>Open a <strong>new terminal</strong> and run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nb">cd</span><span class="w"> </span>section-2/step-04/multi-agent-system
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>./mvnw<span class="w"> </span>quarkus:dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nb">cd</span><span class="w"> </span>section-2/step-04/multi-agent-system
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>./mvnw<span class="w"> </span>quarkus:dev
 </code></pre></div>
 <p>Wait for:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Listening on: http://localhost:8080
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Listening on: http://localhost:8080
 </code></pre></div>
 <h3 id="test-the-complete-flow">Test the Complete Flow<a class="headerlink" href="#test-the-complete-flow" title="Permanent link"></a></h3>
 <p>Open your browser to <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>.</p>
 <p>After reloading the UI, you should see the Returns section is now called <strong>Returns and Dispositions</strong>. You’ll also notice that there is a new tab to list the cars that are pending disposition.</p>
 <p><img alt="Maintenance Returns Tab" class="center" src="../../images/agentic-UI-maintenance-returns-2.png"></p>
 <p>On the Maintenance Return tab, enter feedback indicating severe damage for the Ford F-150:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>looks like this car hit a tree
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>looks like this car hit a tree
 </code></pre></div>
 <p>Click <strong>Return</strong>.</p>
 <p><strong>What happens?</strong></p>
@@ -3092,15 +3046,15 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 </ol>
 <h3 id="check-the-logs">Check the Logs<a class="headerlink" href="#check-the-logs" title="Permanent link"></a></h3>
 <p><strong>Terminal 1 (Remote A2A Server):</strong>
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>[DispositionAgentExecutor] Received task: process disposition
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>[DispositionAgent] Analyzing car: Ford Mustang (2022)
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>⛍ DispositionTool result: Car disposition requested for Ford Mustang (2022), Car #11: Scrap the car
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>[DispositionAgentExecutor] Received task: process disposition
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>[DispositionAgent] Analyzing car: Ford Mustang (2022)
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>⛍ DispositionTool result: Car disposition requested for Ford Mustang (2022), Car #11: Scrap the car
 </code></pre></div>
 <p><strong>Terminal 2 (Main Application):</strong>
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>[DispositionFeedbackAgent] DISPOSITION_REQUIRED - Severe structural damage, uneconomical to repair
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>[ActionWorkflow] Activating DispositionAgent
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>[DispositionAgent @A2AClientAgent] Sending task to http://localhost:8888
-<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>[DispositionAgent @A2AClientAgent] Received result: Car should be scrapped...
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>[DispositionFeedbackAgent] DISPOSITION_REQUIRED - Severe structural damage, uneconomical to repair
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>[ActionWorkflow] Activating DispositionAgent
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>[DispositionAgent @A2AClientAgent] Sending task to http://localhost:8888
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>[DispositionAgent @A2AClientAgent] Received result: Car should be scrapped...
 </code></pre></div>
 <p>Notice the <strong>cross-application communication</strong> via A2A!</p>
 <hr>
@@ -3161,8 +3115,8 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 <h2 id="understanding-the-a2a-implementation">Understanding the A2A Implementation<a class="headerlink" href="#understanding-the-a2a-implementation" title="Permanent link"></a></h2>
 <h3 id="client-side-a2aclientagent">Client Side (<code>@A2AClientAgent</code>)<a class="headerlink" href="#client-side-a2aclientagent" title="Permanent link"></a></h3>
 <p>The client agent is remarkably simple:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nd">@A2AClientAgent</span><span class="p">(</span><span class="n">a2aServerUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"http://localhost:8888"</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="n">String</span><span class="w"> </span><span class="nf">processDisposition</span><span class="p">(...)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nd">@A2AClientAgent</span><span class="p">(</span><span class="n">a2aServerUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"http://localhost:8888"</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">String</span><span class="w"> </span><span class="nf">processDisposition</span><span class="p">(...)</span>
 </code></pre></div>
 <p>Quarkus LangChain4j handles:</p>
 <ul>
@@ -3225,19 +3179,19 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 <h2 id="experiment-further">Experiment Further<a class="headerlink" href="#experiment-further" title="Permanent link"></a></h2>
 <h3 id="1-add-agent-discovery">1. Add Agent Discovery<a class="headerlink" href="#1-add-agent-discovery" title="Permanent link"></a></h3>
 <p>The AgentCard is published at <code>http://localhost:8888/.well-known/agent-card.json</code>. Try:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>curl<span class="w"> </span>http://localhost:8888/.well-known/agent-card.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>curl<span class="w"> </span>http://localhost:8888/.well-known/agent-card.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
 </code></pre></div>
 <p>You’ll see the full agent description including skills, capabilities, and transport protocols.</p>
 <h3 id="2-test-different-disposition-scenarios">2. Test Different Disposition Scenarios<a class="headerlink" href="#2-test-different-disposition-scenarios" title="Permanent link"></a></h3>
 <p>Try these feedback examples:</p>
 <p><strong>Scenario 1: Sell the car</strong>
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>Minor engine issues, good body condition, low mileage. Repair cost: $800.
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>Minor engine issues, good body condition, low mileage. Repair cost: $800.
 </code></pre></div>
 <p><strong>Scenario 2: Donate the car</strong>
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>Old car, high mileage, runs but needs work. Market value low.
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>Old car, high mileage, runs but needs work. Market value low.
 </code></pre></div>
 <p><strong>Scenario 3: Scrap the car</strong>
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>Total loss from flood damage, electrical system destroyed.
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>Total loss from flood damage, electrical system destroyed.
 </code></pre></div>
 <p>Observe how the remote agent makes different decisions!</p>
 <h3 id="3-create-your-own-a2a-agent">3. Create Your Own A2A Agent<a class="headerlink" href="#3-create-your-own-a2a-agent" title="Permanent link"></a></h3>
@@ -3250,8 +3204,8 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 <p>Try creating a simple A2A server for one of these!</p>
 <h3 id="4-monitor-a2a-communication">4. Monitor A2A Communication<a class="headerlink" href="#4-monitor-a2a-communication" title="Permanent link"></a></h3>
 <p>Add logging to see the JSON-RPC messages:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1"># In application.properties</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="na">quarkus.log.category."io.a2a".level</span><span class="o">=</span><span class="s">DEBUG</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1"># In application.properties</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="na">quarkus.log.category."io.a2a".level</span><span class="o">=</span><span class="s">DEBUG</span>
 </code></pre></div>
 <p>This shows the raw A2A protocol messages.</p>
 <hr>
@@ -3259,10 +3213,10 @@ Clients can query this endpoint to discover the agent’s capabilities.</p>
 <details class="warning">
 <summary>Connection refused to localhost:8888</summary>
 <p>Make sure the remote A2A server is running in Terminal 1. Check for:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>Listening on: http://localhost:8888
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>Listening on: http://localhost:8888
 </code></pre></div>
 <p>If you see “Port already in use”, another application is using port 8888. You can change it in <code>remote-a2a-agent/src/main/resources/application.properties</code>:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="na">quarkus.http.port</span><span class="o">=</span><span class="s">8889</span>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="na">quarkus.http.port</span><span class="o">=</span><span class="s">8889</span>
 </code></pre></div>
 <p>Then update the client’s <code>a2aServerUrl</code> accordingly.</p>
 </details>
