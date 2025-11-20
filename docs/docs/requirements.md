@@ -7,7 +7,7 @@
 - **Git** – [Installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git){target="_blank"}
 - **IDE with Java support** – IntelliJ, Eclipse, VSCode (with Java extension), etc.
 - **Terminal** – to run commands
-- **OpenAI API key** – provided by the workshop organizer
+- **OpenAI API key** – provided by the workshop organizer (if needed - more details below)
 - **Podman or Docker** – see [Podman installation](https://podman.io/getting-started/installation){target="_blank"} or [Docker installation](https://docs.docker.com/get-docker/){target="_blank"}
     - If you use Podman, we recommend [Podman Desktop](https://podman-desktop.io/docs/installation){target="_blank"} for easier container management.
     - Warm up container images:

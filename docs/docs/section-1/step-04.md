@@ -25,7 +25,7 @@ To add a system message, we need to enhance our `CustomerSupportAgent` interface
 --8<-- "../../section-1/step-04/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgent.java"
 ```
 
-If you do not follow the workshop, the `step-04` directory already contains the updated `CustomerSupportAgent`
+If you are not following the workshop, the `step-04` directory already contains the updated `CustomerSupportAgent`
 interface.
 
 As you can see, we added the `@SystemMessage` annotation to the `chat` method.
