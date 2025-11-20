@@ -79,35 +79,6 @@ Once you have a key, set it as an environment variable:
 
 ---
 
-## Good to Know
-
-### Quarkus Dev Mode
-
-Run your Quarkus app in **dev mode** from the project directory:
-
-```bash
-./mvnw quarkus:dev
-```
-
-Dev mode automatically recompiles your code on every change.
-Your app will be available at http://localhost:8080/.
-
-!!! warning "Switching steps"
-    Stop the running application (Ctrl+C) before starting the next step.
-
-### Dev UI
-
-Quarkus ships with a [Dev UI](https://quarkus.io/guides/dev-ui){target="\_blank"}, available only in dev mode at [http://localhost:8080/q/dev/](http://localhost:8080/q/dev/).
-Think of it as your **toolbox** when building Quarkus applications.
-
-### Debugging
-
-To debug an app in dev mode, put breakpoints in your code and attach your IDE debugger.
-In IntelliJ, use `Run > Attach to Process` and select the Quarkus process.
-Other IDEs (Eclipse, VSCode) support similar remote debugging.
-
----
-
 ## Getting the Workshop Material
 
 Either clone the repository with Git or download a ZIP archive.
@@ -126,6 +97,35 @@ curl -L -o workshop.zip https://github.com/eldermoraes/quarkus-workshop-langchai
 unzip workshop.zip
 cd quarkus-workshop-langchain4j-main
 ```
+
+---
+
+## Good to Know
+
+### Quarkus Dev Mode
+
+Run your Quarkus app in **dev mode** from the project directory:
+
+```bash
+./mvnw quarkus:dev
+```
+
+Dev mode automatically recompiles your code on every change.
+Your app will be available at http://localhost:8080/.
+
+!!! warning "Switching steps"
+Stop the running application (Ctrl+C) before starting the next step.
+
+### Dev UI
+
+Quarkus ships with a [Dev UI](https://quarkus.io/guides/dev-ui){target="\_blank"}, available only in dev mode at [http://localhost:8080/q/dev/](http://localhost:8080/q/dev/).
+Think of it as your **toolbox** when building Quarkus applications.
+
+### Debugging
+
+To debug an app in dev mode, put breakpoints in your code and attach your IDE debugger.
+In IntelliJ, use `Run > Attach to Process` and select the Quarkus process.
+Other IDEs (Eclipse, VSCode) support similar remote debugging.
 
 ---
 
